@@ -25,8 +25,8 @@ struct FishDetailPage: View {
             VStack(alignment: .leading) {
                 Text(fish.commonName).font(.headline)
                 Text(fish.scientificName)
-                Text(fish.habitat)
-                Text(fish.description)
+                Text("Habitat: " + fish.habitat)
+                Text("Description: " + fish.description)
             }
             .padding(.leading)
             Spacer()
