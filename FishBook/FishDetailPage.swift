@@ -31,7 +31,7 @@ struct FishDetailPage: View {
             .padding(.leading)
             Spacer()
         }
-        .navigationTitle(fish.scientificName)
+        .navigationTitle(fish.commonName)
     }
 }
 
