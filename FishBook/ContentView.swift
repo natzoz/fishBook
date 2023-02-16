@@ -7,12 +7,6 @@
 
 import SwiftUI
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomePage(fishes: testData)
-    }
-}
-
 struct HomePage: View {
     var fishes: [Fish] = []
     
@@ -30,10 +24,11 @@ struct FishListCell: View {
     var fish: Fish
     
     var body: some View {
-        NavigationLink(destination:
-                        Text(fish.commonName)){
-            Image(fish.imageName).resizable().frame(width: 35, height: 35)
-                .cornerRadius(7)
+        NavigationLink(destination: FishDetailPage(fish: fish)) {
+            Image(fish.imageName)
+                .resizable()
+                .frame(width: 35, height: 35)
+                .cornerRadius(5)
             
             VStack(alignment: .leading) {
                 Text(fish.commonName)
@@ -42,5 +37,11 @@ struct FishListCell: View {
                     .foregroundColor(.secondary)
             }
         }
+    }
+}
+
+struct HomePage_Previews: PreviewProvider {
+    static var previews: some View {
+        HomePage(fishes: testData)
     }
 }
