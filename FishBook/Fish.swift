@@ -1,10 +1,3 @@
-//
-//  Fish.swift
-//  FishBook
-//
-//  Created by cs-488-01 on 2/16/23.
-//
-
 import Foundation
 
 struct Fish: Identifiable {
@@ -15,18 +8,17 @@ struct Fish: Identifiable {
     var group: String
     var family: String
     var habitat: String
-    var occurence: String
+    var occurrence: String
     var description: String
     
     var imageName: String { return scientificName}
 }
 
 let testData = [
-    Fish(commonName: "Butterfly Fish1", scientificName: "Heniochus monocerus", group: "test", family: "test", habitat: "Coral dominated", occurence: "test", description: "Description"),
-    Fish(commonName: "Butterfly Fish2", scientificName: "Forcipiger flaviventris", group: "test", family: "test", habitat: "Coral dominated", occurence: "test", description: "Description"),
-    Fish(commonName: "Butterfly Fish3", scientificName: "Heniochus acuminatus", group: "test", family: "test", habitat: "Coral dominated", occurence: "uncommon", description: "Description"),
-    Fish(commonName: "Butterfly Fish4", scientificName: "Chaetodon zanzibarensis", group: "test", family: "test", habitat: "Coral dominated", occurence: "uncommon", description: "Description"),
-    Fish(commonName: "Butterfly Fish5", scientificName: "Chaetodon xanthocephalus", group: "test", family: "test", habitat: "Coral dominated", occurence: "uncommon", description: "Description"),
-    Fish(commonName: "Butterfly Fish6", scientificName: "Chaetodon vagabundus", group: "test", family: "test", habitat: "Coral dominated", occurence: "uncommon", description: "Description")
+    Fish(commonName: "Masked bannerfish", scientificName: "Heniochus monocerus", group: "Butterflyfishes", family: "Chaetodontidae", habitat: "Reef associated, near drop offs/deep reef", occurrence: "occasional", description: "Description"),
+    Fish(commonName: "Longnose butterflyfish", scientificName: "Forcipiger flaviventris", group: "Butterflyfishes", family: "Chaetodontidae", habitat: "Reef associated, near live corals", occurrence: "occasional", description: "Description"),
+    Fish(commonName: "Pennant coralfish", scientificName: "Heniochus acuminatus", group: "Butterflyfishes", family: "Chaetodontidae", habitat: "Reef associated, near drop offs", occurrence: "occasional", description: "Description"),
+    Fish(commonName: "Zanzibar butterflyfish", scientificName: "Chaetodon zanzibarensis", group: "Butterflyfishes", family: "Chaetodontidae", habitat: "Reef associated, near live corals", occurrence: "common", description: "Description"),
+    Fish(commonName: "Yellowhead butterflyfish", scientificName: "Chaetodon xanthocephalus", group: "Butterflyfishes", family: "Chaetodontidae", habitat: "Reef associated, near live corals", occurrence: "occasional", description: "Description"),
+    Fish(commonName: "Vagabond butterflyfish", scientificName: "Chaetodon vagabundus", group: "Butterflyfishes", family: "Chaetodontidae", habitat: "Reef associated, near live corals", occurrence: "common", description: "Description")
 ]
-

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D465B6F329A56302002B0F06 /* FishData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D465B6F229A56302002B0F06 /* FishData.swift */; };
 		D4785ACE299ECB040026F1B1 /* FishBookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4785ACD299ECB040026F1B1 /* FishBookApp.swift */; };
 		D4785AD0299ECB040026F1B1 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4785ACF299ECB040026F1B1 /* HomePage.swift */; };
 		D4785AD2299ECB040026F1B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4785AD1299ECB040026F1B1 /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D465B6F229A56302002B0F06 /* FishData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishData.swift; sourceTree = "<group>"; };
 		D4785ACA299ECB040026F1B1 /* FishBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FishBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4785ACD299ECB040026F1B1 /* FishBookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishBookApp.swift; sourceTree = "<group>"; };
 		D4785ACF299ECB040026F1B1 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 		D4785AC1299ECB040026F1B1 = {
 			isa = PBXGroup;
 			children = (
+				D465B6F229A56302002B0F06 /* FishData.swift */,
 				D4785ACC299ECB040026F1B1 /* FishBook */,
 				D4785ADE299ECB040026F1B1 /* FishBookTests */,
 				D4785AE8299ECB040026F1B1 /* FishBookUITests */,
@@ -271,6 +274,7 @@
 			files = (
 				D4785AD0299ECB040026F1B1 /* HomePage.swift in Sources */,
 				D4EF4BC4299EE3380093670B /* FishDetailPage.swift in Sources */,
+				D465B6F329A56302002B0F06 /* FishData.swift in Sources */,
 				D4EF4BC0299ED2C40093670B /* Fish.swift in Sources */,
 				D4785ACE299ECB040026F1B1 /* FishBookApp.swift in Sources */,
 			);

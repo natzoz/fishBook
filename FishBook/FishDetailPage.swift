@@ -1,10 +1,3 @@
-//
-//  FishDetailPage.swift
-//  FishBook
-//
-//  Created by cs-488-01 on 2/16/23.
-//
-
 import SwiftUI
 
 struct FishDetailPage: View {
@@ -25,6 +18,7 @@ struct FishDetailPage: View {
             VStack(alignment: .leading) {
                 Text(fish.commonName).font(.headline)
                 Text(fish.scientificName)
+                Text("Occurrence: " + fish.occurrence)
                 Text("Habitat: " + fish.habitat)
                 Text("Description: " + fish.description)
             }
@@ -38,7 +32,7 @@ struct FishDetailPage: View {
 struct FishDetailPage_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            FishDetailPage(fish: testData[0])
+            FishDetailPage(fish: testData[1])
         }
     }
 }
