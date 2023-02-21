@@ -32,7 +32,7 @@ struct FishDetailPage: View {
 struct FishDetailPage_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            FishDetailPage(fish: testData[1])
+            FishDetailPage(fish: FishDataStore.share.getAllFish()[0])
         }
     }
 }

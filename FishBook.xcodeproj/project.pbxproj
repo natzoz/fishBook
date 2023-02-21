@@ -285,11 +285,8 @@
 			files = (
 				D4785AD0299ECB040026F1B1 /* HomePage.swift in Sources */,
 				D4EF4BC4299EE3380093670B /* FishDetailPage.swift in Sources */,
-<<<<<<< HEAD
 				D47E981729A565CE00F9C684 /* FishDataStore.swift in Sources */,
-=======
 				D465B6F329A56302002B0F06 /* FishData.swift in Sources */,
->>>>>>> main
 				D4EF4BC0299ED2C40093670B /* Fish.swift in Sources */,
 				D4785ACE299ECB040026F1B1 /* FishBookApp.swift in Sources */,
 			);
