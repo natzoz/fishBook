@@ -83,7 +83,6 @@
 		D4785AC1299ECB040026F1B1 = {
 			isa = PBXGroup;
 			children = (
-				D465B6F229A56302002B0F06 /* FishData.swift */,
 				D4785ACC299ECB040026F1B1 /* FishBook */,
 				D4785ADE299ECB040026F1B1 /* FishBookTests */,
 				D4785AE8299ECB040026F1B1 /* FishBookUITests */,
@@ -104,6 +103,7 @@
 		D4785ACC299ECB040026F1B1 /* FishBook */ = {
 			isa = PBXGroup;
 			children = (
+				D465B6F229A56302002B0F06 /* FishData.swift */,
 				D4785ACD299ECB040026F1B1 /* FishBookApp.swift */,
 				D4EF4BBF299ED2C40093670B /* Fish.swift */,
 				D4EF4BC1299EDADA0093670B /* Fish.xcassets */,
