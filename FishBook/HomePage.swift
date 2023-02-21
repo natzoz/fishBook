@@ -1,28 +1,17 @@
-//
-//  ContentView.swift
-//  FishBook
-//
-//  Created by cs-488-01 on 2/16/23.
-//
-
 import SwiftUI
 
 struct HomePage: View {
-    var fishes: [Fish] = [
-    Fish(commonName: "Butterfly Fish1", scientificName: "Heniochus monocerus", group: "test", family: "test", habitat: "Coral dominated", occurence: "test", description: "Description"),
-    Fish(commonName: "Butterfly Fish2", scientificName: "Forcipiger flaviventris", group: "test", family: "test", habitat: "Coral dominated", occurence: "test", description: "Description"),
-    Fish(commonName: "Butterfly Fish3", scientificName: "Heniochus acuminatus", group: "test", family: "test", habitat: "Coral dominated", occurence: "uncommon", description: "Description"),
-    Fish(commonName: "Butterfly Fish4", scientificName: "Chaetodon zanzibarensis", group: "test", family: "test", habitat: "Coral dominated", occurence: "uncommon", description: "Description"),
-    Fish(commonName: "Butterfly Fish5", scientificName: "Chaetodon xanthocephalus", group: "test", family: "test", habitat: "Coral dominated", occurence: "uncommon", description: "Description"),
-    Fish(commonName: "Butterfly Fish6", scientificName: "Chaetodon vagabundus", group: "test", family: "test", habitat: "Coral dominated", occurence: "uncommon", description: "Description")
-    ]
+    @ObservedObject var fishData: FishData
     
     var body: some View {
         NavigationView {
-            List(fishes) { fish in
+            List(fishData.fishes) { fish in
                 FishListCell(fish: fish)
             }
             .navigationTitle("Fish Book")
+            
+            Text("Select a fish to learn more about!")
+                .font(.largeTitle)
         }
     }
 }
@@ -49,6 +38,6 @@ struct FishListCell: View {
 
 struct HomePage_Previews: PreviewProvider {
     static var previews: some View {
-        HomePage(fishes: testData)
+        HomePage(fishData: testFishData)
     }
 }

@@ -1,10 +1,3 @@
-//
-//  FishDetailPage.swift
-//  FishBook
-//
-//  Created by cs-488-01 on 2/16/23.
-//
-
 import SwiftUI
 
 struct FishDetailPage: View {
