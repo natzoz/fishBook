@@ -15,6 +15,8 @@
 		D4785AE0299ECB040026F1B1 /* FishBookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4785ADF299ECB040026F1B1 /* FishBookTests.swift */; };
 		D4785AEA299ECB040026F1B1 /* FishBookUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4785AE9299ECB040026F1B1 /* FishBookUITests.swift */; };
 		D4785AEC299ECB040026F1B1 /* FishBookUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4785AEB299ECB040026F1B1 /* FishBookUITestsLaunchTests.swift */; };
+		D47E981729A565CE00F9C684 /* FishDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E981629A565CE00F9C684 /* FishDataStore.swift */; };
+		D47E981A29A5668A00F9C684 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = D47E981929A5668A00F9C684 /* SQLite */; };
 		D4EF4BC0299ED2C40093670B /* Fish.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EF4BBF299ED2C40093670B /* Fish.swift */; };
 		D4EF4BC2299EDADA0093670B /* Fish.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4EF4BC1299EDADA0093670B /* Fish.xcassets */; };
 		D4EF4BC4299EE3380093670B /* FishDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EF4BC3299EE3380093670B /* FishDetailPage.swift */; };
@@ -50,6 +52,7 @@
 		D4785AE5299ECB040026F1B1 /* FishBookUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FishBookUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4785AE9299ECB040026F1B1 /* FishBookUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishBookUITests.swift; sourceTree = "<group>"; };
 		D4785AEB299ECB040026F1B1 /* FishBookUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishBookUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D47E981629A565CE00F9C684 /* FishDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishDataStore.swift; sourceTree = "<group>"; };
 		D4EF4BBF299ED2C40093670B /* Fish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fish.swift; sourceTree = "<group>"; };
 		D4EF4BC1299EDADA0093670B /* Fish.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Fish.xcassets; sourceTree = "<group>"; };
 		D4EF4BC3299EE3380093670B /* FishDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishDetailPage.swift; sourceTree = "<group>"; };
@@ -60,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D47E981A29A5668A00F9C684 /* SQLite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +116,7 @@
 				D4785AD1299ECB040026F1B1 /* Assets.xcassets */,
 				D4785AD3299ECB040026F1B1 /* FishBook.entitlements */,
 				D4785AD4299ECB040026F1B1 /* Preview Content */,
+				D47E981629A565CE00F9C684 /* FishDataStore.swift */,
 			);
 			path = FishBook;
 			sourceTree = "<group>";
@@ -157,6 +162,9 @@
 			dependencies = (
 			);
 			name = FishBook;
+			packageProductDependencies = (
+				D47E981929A5668A00F9C684 /* SQLite */,
+			);
 			productName = FishBook;
 			productReference = D4785ACA299ECB040026F1B1 /* FishBook.app */;
 			productType = "com.apple.product-type.application";
@@ -229,6 +237,9 @@
 				Base,
 			);
 			mainGroup = D4785AC1299ECB040026F1B1;
+			packageReferences = (
+				D47E981829A5668A00F9C684 /* XCRemoteSwiftPackageReference "SQLite.swift" */,
+			);
 			productRefGroup = D4785ACB299ECB040026F1B1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -274,6 +285,7 @@
 			files = (
 				D4785AD0299ECB040026F1B1 /* HomePage.swift in Sources */,
 				D4EF4BC4299EE3380093670B /* FishDetailPage.swift in Sources */,
+				D47E981729A565CE00F9C684 /* FishDataStore.swift in Sources */,
 				D465B6F329A56302002B0F06 /* FishData.swift in Sources */,
 				D4EF4BC0299ED2C40093670B /* Fish.swift in Sources */,
 				D4785ACE299ECB040026F1B1 /* FishBookApp.swift in Sources */,
@@ -428,9 +440,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FishBook/FishBook.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FishBook/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -450,6 +463,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = NatalieZoz.FishBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -464,9 +478,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FishBook/FishBook.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FishBook/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -486,6 +501,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = NatalieZoz.FishBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -620,6 +636,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D47E981829A5668A00F9C684 /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D47E981929A5668A00F9C684 /* SQLite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D47E981829A5668A00F9C684 /* XCRemoteSwiftPackageReference "SQLite.swift" */;
+			productName = SQLite;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D4785AC2299ECB040026F1B1 /* Project object */;
 }

@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct HomePage: View {
+
     @ObservedObject var fishData: FishData
     
     var body: some View {
@@ -38,6 +39,6 @@ struct FishListCell: View {
 
 struct HomePage_Previews: PreviewProvider {
     static var previews: some View {
-        HomePage(fishData: testFishData)
+        HomePage(fishData: allFishData)
     }
 }

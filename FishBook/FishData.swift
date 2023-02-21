@@ -8,4 +8,4 @@ class FishData : ObservableObject{
     }
 }
 
-let testFishData = FishData(fishes: testData)
+let allFishData = FishData(fishes: FishDataStore.share.getAllFish())
