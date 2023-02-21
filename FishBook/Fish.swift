@@ -1,10 +1,3 @@
-//
-//  Fish.swift
-//  FishBook
-//
-//  Created by cs-488-01 on 2/16/23.
-//
-
 import Foundation
 
 struct Fish: Identifiable {
@@ -15,7 +8,7 @@ struct Fish: Identifiable {
     var group: String
     var family: String
     var habitat: String
-    var occurence: String
+    var occurrence: String
     var description: String
     
     var imageName: String { return scientificName}
