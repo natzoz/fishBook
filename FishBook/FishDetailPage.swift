@@ -38,7 +38,7 @@ struct FishDetailPage: View {
 struct FishDetailPage_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            FishDetailPage(fish: testData[0])
+            FishDetailPage(fish: FishDataStore.share.getFish(fishId: 0)!)
         }
     }
 }

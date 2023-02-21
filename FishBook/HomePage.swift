@@ -8,14 +8,7 @@
 import SwiftUI
 
 struct HomePage: View {
-    var fishes: [Fish] = [
-    Fish(commonName: "Butterfly Fish1", scientificName: "Heniochus monocerus", group: "test", family: "test", habitat: "Coral dominated", occurence: "test", description: "Description"),
-    Fish(commonName: "Butterfly Fish2", scientificName: "Forcipiger flaviventris", group: "test", family: "test", habitat: "Coral dominated", occurence: "test", description: "Description"),
-    Fish(commonName: "Butterfly Fish3", scientificName: "Heniochus acuminatus", group: "test", family: "test", habitat: "Coral dominated", occurence: "uncommon", description: "Description"),
-    Fish(commonName: "Butterfly Fish4", scientificName: "Chaetodon zanzibarensis", group: "test", family: "test", habitat: "Coral dominated", occurence: "uncommon", description: "Description"),
-    Fish(commonName: "Butterfly Fish5", scientificName: "Chaetodon xanthocephalus", group: "test", family: "test", habitat: "Coral dominated", occurence: "uncommon", description: "Description"),
-    Fish(commonName: "Butterfly Fish6", scientificName: "Chaetodon vagabundus", group: "test", family: "test", habitat: "Coral dominated", occurence: "uncommon", description: "Description")
-    ]
+    var fishes = FishDataStore.share.getAllFish()
     
     var body: some View {
         NavigationView {
@@ -49,6 +42,6 @@ struct FishListCell: View {
 
 struct HomePage_Previews: PreviewProvider {
     static var previews: some View {
-        HomePage(fishes: testData)
+        HomePage()
     }
 }
