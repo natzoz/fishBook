@@ -1,21 +1,17 @@
-//
-//  ContentView.swift
-//  FishBook
-//
-//  Created by cs-488-01 on 2/16/23.
-//
-
 import SwiftUI
 
 struct HomePage: View {
-    var fishes = FishDataStore.share.getAllFish()
+    @ObservedObject var fishData: FishData
     
     var body: some View {
         NavigationView {
-            List(fishes) { fish in
+            List(fishData.fishes) { fish in
                 FishListCell(fish: fish)
             }
             .navigationTitle("Fish Book")
+            
+            Text("Select a fish to learn more about!")
+                .font(.largeTitle)
         }
     }
 }
@@ -42,6 +38,6 @@ struct FishListCell: View {
 
 struct HomePage_Previews: PreviewProvider {
     static var previews: some View {
-        HomePage()
+        HomePage(fishData: testFishData)
     }
 }
