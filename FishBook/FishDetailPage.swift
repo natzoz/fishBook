@@ -16,11 +16,19 @@ struct FishDetailPage: View {
                     }
                 }
             VStack(alignment: .leading) {
-                Text(fish.commonName).font(.headline)
-                Text(fish.scientificName)
-                Text("Occurrence: " + fish.occurrence)
-                Text("Habitat: " + fish.habitat)
-                Text("Description: " + fish.description)
+                Text(fish.scientificName).font(.title).italic()
+                HStack {
+                    Text("Occurrence:").bold()
+                    Text(fish.occurrence)
+                }
+                HStack {
+                    Text("Habitat:").bold()
+                    Text(fish.habitat)
+                }
+                HStack {
+                    Text("Description:").bold()
+                    Text(fish.description)
+                }
             }
             .padding(.leading)
             Spacer()
