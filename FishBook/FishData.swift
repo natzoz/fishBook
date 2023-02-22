@@ -9,3 +9,4 @@ class FishData : ObservableObject{
 }
 
 let allFishData = FishData(fishes: FishDataStore.share.getAllFish())
+let testFishData = FishData(fishes: testData)

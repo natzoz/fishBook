@@ -1,6 +1,6 @@
 import Foundation
 
-struct Fish: Identifiable {
+struct Fish: Hashable {
     var id: Int64
     
     var commonName: String

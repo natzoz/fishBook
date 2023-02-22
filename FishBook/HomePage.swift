@@ -1,18 +1,35 @@
 import SwiftUI
 
 struct HomePage: View {
-
     @ObservedObject var fishData: FishData
+    @State private var searchText = ""
     
     var body: some View {
         NavigationView {
-            List(fishData.fishes) { fish in
-                FishListCell(fish: fish)
+            List {
+                ForEach(searchResults, id: \.self) {fish in
+                    FishListCell(fish: fish)
+                }
             }
             .navigationTitle("Fish Book")
             
             Text("Select a fish to learn more about!")
                 .font(.largeTitle)
+        }
+        .searchable(text: $searchText)
+    }
+    
+    var searchResults: [Fish] {
+        var resultList: [Fish] = []
+        if searchText.isEmpty {
+            return fishData.fishes
+        } else {
+            for fish in fishData.fishes {
+                if (fish.commonName.localizedCaseInsensitiveContains(searchText) || fish.scientificName.localizedCaseInsensitiveContains(searchText)) {
+                    resultList.append(fish)
+                }
+            }
+            return resultList
         }
     }
 }
