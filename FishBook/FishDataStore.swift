@@ -70,8 +70,7 @@ class FishDataStore {
             print(error)
         }
     }
-    
-    // Used to Test Database, need to implement adding from file
+
     
      private func insert() {
         let url = Bundle.main.url(forResource: "fishdata", withExtension: "csv")!
@@ -94,7 +93,6 @@ class FishDataStore {
         }
     }
     
-    //
     
     func getAllFish() -> [Fish] {
         var fishes: [Fish] = []
