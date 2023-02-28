@@ -2,20 +2,34 @@ import SwiftUI
 
 struct FamilyPage: View {
     @ObservedObject var fishData: FishData
+    @State private var searchText = ""
     
     var body: some View {
         NavigationStack {
             List {
-                let families: [String] = fishData.families
-                ForEach(families, id: \.self) {family in
-                    NavigationLink(destination: FishList(fishData: fishData)) {
+                ForEach(searchResults, id: \.self) {family in
+                    NavigationLink(destination: FishListPage(fishData: fishData)) {
                         Text(family)
                     }
                 }
             }
             .navigationTitle("Fish Families")
         }
-        
+        .searchable(text: $searchText)
+    }
+    
+    var searchResults: [String] {
+        var resultList: [String] = []
+        if searchText.isEmpty {
+            return fishData.families
+        } else {
+            for family in fishData.families {
+                if (family.localizedCaseInsensitiveContains(searchText)) {
+                    resultList.append(family)
+                }
+            }
+            return resultList
+        }
     }
 }
 
