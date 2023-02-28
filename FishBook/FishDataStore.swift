@@ -1,10 +1,3 @@
-//
-//  FishDataStore.swift
-//  FishBook
-//
-//  Created by cs-488-01 on 2/21/23.
-//
-
 import Foundation
 import SQLite
 
@@ -113,26 +106,4 @@ class FishDataStore {
         }
         return families
     }
-    
-//    func getFish(fishId: Int64) -> Fish? {
-//        var fish: Fish = Fish(id: fishId, commonName: "", scientificName: "", group: "", family: "", habitat: "", occurrence: "", description: "")
-//
-//        guard let database = db else {return nil}
-//
-//        let filter = self.fishes.filter(id == fishId)
-//        do {
-//            for f in try database.prepare(filter) {
-//                fish.commonName = f[commonName]
-//                fish.scientificName = f[scientificName]
-//                fish.group = f[group]
-//                fish.family = f[family]
-//                fish.habitat = f[habitat]
-//                fish.occurrence = f[occurrence]
-//                fish.description = f[description]
-//            }
-//        } catch {
-//            print(error)
-//        }
-//        return fish
-//    }
 }

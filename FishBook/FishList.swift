@@ -11,7 +11,7 @@ struct FishList: View {
                     FishListCell(fish: fish)
                 }
             }
-            .navigationTitle("Fish Book")
+            .navigationTitle("Fish")
             
             Text("Select a fish to learn more about!")
                 .font(.largeTitle)
