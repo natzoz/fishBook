@@ -98,6 +98,22 @@ class FishDataStore {
         return fishes
     }
     
+    func getAllFamilies() -> [String] {
+        var families: [String] = []
+        guard let database = db else { return [] }
+        
+        do {
+            for fish in try database.prepare(self.fishes) {
+                if (!families.contains(fish[family])) {
+                    families.append(fish[family])
+                }
+            }
+        } catch {
+            print(error)
+        }
+        return families
+    }
+    
 //    func getFish(fishId: Int64) -> Fish? {
 //        var fish: Fish = Fish(id: fishId, commonName: "", scientificName: "", group: "", family: "", habitat: "", occurrence: "", description: "")
 //

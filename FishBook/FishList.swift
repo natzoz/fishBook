@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct HomePage: View {
+struct FishList: View {
     @ObservedObject var fishData: FishData
     @State private var searchText = ""
     
@@ -56,6 +56,6 @@ struct FishListCell: View {
 
 struct HomePage_Previews: PreviewProvider {
     static var previews: some View {
-        HomePage(fishData: allFishData)
+        FishList(fishData: allFishData)
     }
 }
