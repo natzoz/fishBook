@@ -69,8 +69,6 @@ class FishDataStore {
         }
     }
     
-    // Used to Test Database, need to implement adding from file
-    
      private func insert() {
         do {
             try db?.run(fishes.insert(commonName <- "Butterfly Fish 1", scientificName <- "Heniochus monocerus", group <- "Group", family <- "Family", habitat <- "Habitat", occurance <- "Occurance", description <- "Description 1"))
@@ -98,25 +96,4 @@ class FishDataStore {
         return fishes
     }
     
-//    func getFish(fishId: Int64) -> Fish? {
-//        var fish: Fish = Fish(id: fishId, commonName: "", scientificName: "", group: "", family: "", habitat: "", occurrence: "", description: "")
-//
-//        guard let database = db else {return nil}
-//
-//        let filter = self.fishes.filter(id == fishId)
-//        do {
-//            for f in try database.prepare(filter) {
-//                fish.commonName = f[commonName]
-//                fish.scientificName = f[scientificName]
-//                fish.group = f[group]
-//                fish.family = f[family]
-//                fish.habitat = f[habitat]
-//                fish.occurrence = f[occurrence]
-//                fish.description = f[description]
-//            }
-//        } catch {
-//            print(error)
-//        }
-//        return fish
-//    }
 }
