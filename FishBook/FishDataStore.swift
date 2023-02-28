@@ -7,6 +7,7 @@
 
 import Foundation
 import SQLite
+import TabularData
 
 class FishDataStore {
     
@@ -48,6 +49,7 @@ class FishDataStore {
     }
     
     private func createTable() {
+        
         guard let database = db else {
             return
         }
@@ -72,11 +74,21 @@ class FishDataStore {
     // Used to Test Database, need to implement adding from file
     
      private func insert() {
+        let url = Bundle.main.url(forResource: "fishdata", withExtension: "csv")!
+        let datatable = try? DataFrame(contentsOfCSVFile: url)
+        let rowcount = datatable?.rows.count
         do {
-            try db?.run(fishes.insert(commonName <- "Butterfly Fish 1", scientificName <- "Heniochus monocerus", group <- "Group", family <- "Family", habitat <- "Habitat", occurance <- "Occurance", description <- "Description 1"))
-            try db?.run(fishes.insert(commonName <- "Butterfly Fish 2", scientificName <- "Heniochus flaviventris", group <- "Group", family <- "Family", habitat <- "Habitat", occurance <- "Occurance", description <- "Description 2"))
-            try db?.run(fishes.insert(commonName <- "Butterfly Fish 3", scientificName <- "Heniochus acuminatus", group <- "Group", family <- "Family", habitat <- "Habitat", occurance <- "Occurance", description <- "Description 3"))
-            print("insertion success")
+            for i in 0...(rowcount!-1){ //column
+                try db?.run(fishes.insert(
+                    commonName <- (datatable![row: i][2, String.self])!,
+                    scientificName <- (datatable![row: i][3, String.self])!,
+                    group <- (datatable![row: i][0, String.self])!,
+                    family <- (datatable![row: i][1, String.self])!,
+                    habitat <- (datatable![row: i][5, String.self])!,
+                    occurance <- (datatable![row: i][4, String.self])!,
+                    description <- "Description"))
+            }
+            print("Inserted " , rowcount! , " fish")
         } catch {
             print("insertion failed: \(error)")
         }
