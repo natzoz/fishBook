@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D407B06D29AEA439000A7167 /* FamilyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D407B06C29AEA439000A7167 /* FamilyPage.swift */; };
 		D465B6F329A56302002B0F06 /* FishData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D465B6F229A56302002B0F06 /* FishData.swift */; };
 		D4785ACE299ECB040026F1B1 /* FishBookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4785ACD299ECB040026F1B1 /* FishBookApp.swift */; };
-		D4785AD0299ECB040026F1B1 /* FishListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4785ACF299ECB040026F1B1 /* FishListPage.swift */; };
+		D4785AD0299ECB040026F1B1 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4785ACF299ECB040026F1B1 /* HomePage.swift */; };
 		D4785AD2299ECB040026F1B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4785AD1299ECB040026F1B1 /* Assets.xcassets */; };
 		D4785AD6299ECB040026F1B1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4785AD5299ECB040026F1B1 /* Preview Assets.xcassets */; };
 		D4785AE0299ECB040026F1B1 /* FishBookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4785ADF299ECB040026F1B1 /* FishBookTests.swift */; };
@@ -18,7 +17,6 @@
 		D4785AEC299ECB040026F1B1 /* FishBookUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4785AEB299ECB040026F1B1 /* FishBookUITestsLaunchTests.swift */; };
 		D47E981729A565CE00F9C684 /* FishDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E981629A565CE00F9C684 /* FishDataStore.swift */; };
 		D47E981A29A5668A00F9C684 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = D47E981929A5668A00F9C684 /* SQLite */; };
-		D48C5E9E29AEABBA000FD31C /* fishdata.csv in Resources */ = {isa = PBXBuildFile; fileRef = D48C5E9D29AEABBA000FD31C /* fishdata.csv */; };
 		D4EF4BC0299ED2C40093670B /* Fish.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EF4BBF299ED2C40093670B /* Fish.swift */; };
 		D4EF4BC2299EDADA0093670B /* Fish.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4EF4BC1299EDADA0093670B /* Fish.xcassets */; };
 		D4EF4BC4299EE3380093670B /* FishDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EF4BC3299EE3380093670B /* FishDetailPage.swift */; };
@@ -42,11 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D407B06C29AEA439000A7167 /* FamilyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyPage.swift; sourceTree = "<group>"; };
 		D465B6F229A56302002B0F06 /* FishData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishData.swift; sourceTree = "<group>"; };
 		D4785ACA299ECB040026F1B1 /* FishBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FishBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4785ACD299ECB040026F1B1 /* FishBookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishBookApp.swift; sourceTree = "<group>"; };
-		D4785ACF299ECB040026F1B1 /* FishListPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishListPage.swift; sourceTree = "<group>"; };
+		D4785ACF299ECB040026F1B1 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		D4785AD1299ECB040026F1B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D4785AD3299ECB040026F1B1 /* FishBook.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FishBook.entitlements; sourceTree = "<group>"; };
 		D4785AD5299ECB040026F1B1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -56,7 +53,6 @@
 		D4785AE9299ECB040026F1B1 /* FishBookUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishBookUITests.swift; sourceTree = "<group>"; };
 		D4785AEB299ECB040026F1B1 /* FishBookUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishBookUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D47E981629A565CE00F9C684 /* FishDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishDataStore.swift; sourceTree = "<group>"; };
-		D48C5E9D29AEABBA000FD31C /* fishdata.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = fishdata.csv; path = ../../../Downloads/fishdata.csv; sourceTree = "<group>"; };
 		D4EF4BBF299ED2C40093670B /* Fish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fish.swift; sourceTree = "<group>"; };
 		D4EF4BC1299EDADA0093670B /* Fish.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Fish.xcassets; sourceTree = "<group>"; };
 		D4EF4BC3299EE3380093670B /* FishDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishDetailPage.swift; sourceTree = "<group>"; };
@@ -115,7 +111,7 @@
 				D4785ACD299ECB040026F1B1 /* FishBookApp.swift */,
 				D4EF4BBF299ED2C40093670B /* Fish.swift */,
 				D4EF4BC1299EDADA0093670B /* Fish.xcassets */,
-				D4785ACF299ECB040026F1B1 /* FishListPage.swift */,
+				D4785ACF299ECB040026F1B1 /* HomePage.swift */,
 				D4EF4BC3299EE3380093670B /* FishDetailPage.swift */,
 				D4785AD1299ECB040026F1B1 /* Assets.xcassets */,
 				D4785AD3299ECB040026F1B1 /* FishBook.entitlements */,
@@ -264,7 +260,6 @@
 			files = (
 				D4785AD6299ECB040026F1B1 /* Preview Assets.xcassets in Resources */,
 				D4EF4BC2299EDADA0093670B /* Fish.xcassets in Resources */,
-				D48C5E9E29AEABBA000FD31C /* fishdata.csv in Resources */,
 				D4785AD2299ECB040026F1B1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,9 +285,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4785AD0299ECB040026F1B1 /* FishListPage.swift in Sources */,
+				D4785AD0299ECB040026F1B1 /* HomePage.swift in Sources */,
 				D4EF4BC4299EE3380093670B /* FishDetailPage.swift in Sources */,
-				D407B06D29AEA439000A7167 /* FamilyPage.swift in Sources */,
 				D47E981729A565CE00F9C684 /* FishDataStore.swift in Sources */,
 				D465B6F329A56302002B0F06 /* FishData.swift in Sources */,
 				D4EF4BC0299ED2C40093670B /* Fish.swift in Sources */,

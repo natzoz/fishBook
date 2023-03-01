@@ -2,13 +2,11 @@ import Foundation
 
 class FishData : ObservableObject{
     @Published var fishes: [Fish]
-    @Published var families: [String]
     
-    init(fishes: [Fish] = [], families: [String] = []) {
+    init(fishes: [Fish] = []) {
         self.fishes = fishes
-        self.families = families
     }
 }
 
-let allFishData = FishData(fishes: FishDataStore.share.getAllFish(), families: FishDataStore.share.getAllFamilies())
+let allFishData = FishData(fishes: FishDataStore.share.getAllFish())
 let testFishData = FishData(fishes: testData)

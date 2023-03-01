@@ -84,7 +84,6 @@ class FishDataStore {
         }
     }
     
-    
     func getAllFish() -> [Fish] {
         var fishes: [Fish] = []
         guard let database = db else { return [] }
