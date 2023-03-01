@@ -17,8 +17,8 @@
 		D4785AEA299ECB040026F1B1 /* FishBookUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4785AE9299ECB040026F1B1 /* FishBookUITests.swift */; };
 		D4785AEC299ECB040026F1B1 /* FishBookUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4785AEB299ECB040026F1B1 /* FishBookUITestsLaunchTests.swift */; };
 		D47E981729A565CE00F9C684 /* FishDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E981629A565CE00F9C684 /* FishDataStore.swift */; };
-		D48C5E9E29AEABBA000FD31C /* fishdata.csv in Resources */ = {isa = PBXBuildFile; fileRef = D48C5E9D29AEABBA000FD31C /* fishdata.csv */; };
 		D47E981A29A5668A00F9C684 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = D47E981929A5668A00F9C684 /* SQLite */; };
+		D48C5E9E29AEABBA000FD31C /* fishdata.csv in Resources */ = {isa = PBXBuildFile; fileRef = D48C5E9D29AEABBA000FD31C /* fishdata.csv */; };
 		D4EF4BC0299ED2C40093670B /* Fish.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EF4BBF299ED2C40093670B /* Fish.swift */; };
 		D4EF4BC2299EDADA0093670B /* Fish.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4EF4BC1299EDADA0093670B /* Fish.xcassets */; };
 		D4EF4BC4299EE3380093670B /* FishDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EF4BC3299EE3380093670B /* FishDetailPage.swift */; };
@@ -54,9 +54,9 @@
 		D4785ADF299ECB040026F1B1 /* FishBookTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishBookTests.swift; sourceTree = "<group>"; };
 		D4785AE5299ECB040026F1B1 /* FishBookUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FishBookUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4785AE9299ECB040026F1B1 /* FishBookUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishBookUITests.swift; sourceTree = "<group>"; };
-		D48C5E9D29AEABBA000FD31C /* fishdata.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = fishdata.csv; path = ../../../Downloads/fishdata.csv; sourceTree = "<group>"; };
 		D4785AEB299ECB040026F1B1 /* FishBookUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishBookUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D47E981629A565CE00F9C684 /* FishDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishDataStore.swift; sourceTree = "<group>"; };
+		D48C5E9D29AEABBA000FD31C /* fishdata.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = fishdata.csv; path = ../../../Downloads/fishdata.csv; sourceTree = "<group>"; };
 		D4EF4BBF299ED2C40093670B /* Fish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fish.swift; sourceTree = "<group>"; };
 		D4EF4BC1299EDADA0093670B /* Fish.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Fish.xcassets; sourceTree = "<group>"; };
 		D4EF4BC3299EE3380093670B /* FishDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishDetailPage.swift; sourceTree = "<group>"; };
@@ -219,7 +219,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1400;
-				LastUpgradeCheck = 1400;
+				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					D4785AC9299ECB040026F1B1 = {
 						CreatedOnToolsVersion = 14.0;
@@ -366,6 +366,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -424,6 +425,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -448,8 +450,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FishBook/FishBook.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"FishBook/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
@@ -486,8 +490,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FishBook/FishBook.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"FishBook/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
@@ -525,6 +531,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MACOSX_DEPLOYMENT_TARGET = 12.6;
@@ -547,6 +554,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MACOSX_DEPLOYMENT_TARGET = 12.6;
@@ -568,6 +576,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MACOSX_DEPLOYMENT_TARGET = 12.6;
@@ -589,6 +598,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MACOSX_DEPLOYMENT_TARGET = 12.6;
