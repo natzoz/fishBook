@@ -17,6 +17,8 @@ struct FishListPage: View {
                 }
                 .pickerStyle(.menu)
                 
+                updateList(data: fishData, selection: selection)
+                
                 ForEach(searchResults, id: \.self) {fish in
                     FishListCell(fish: fish)
                 }
@@ -27,6 +29,14 @@ struct FishListPage: View {
                 .font(.largeTitle)
         }
         .searchable(text: $searchText)
+    }
+    
+    func updateList(data: FishData, selection: String) -> FishData {
+        if (selection == "All Fish") {
+            let data = fishAtoZ
+        }
+        
+        return data
     }
     
     var searchResults: [Fish] {
