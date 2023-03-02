@@ -3,10 +3,21 @@ import SwiftUI
 struct FishListPage: View {
     @ObservedObject var fishData: FishData
     @State private var searchText = ""
+    @State private var selection = "All Fish"
+    
+    let categories = ["All Fish", "Group", "Family", "Occurrence", "Habitat"]
     
     var body: some View {
         NavigationView {
             List {
+                
+                Picker("Filter", selection: $selection) {
+                    ForEach(categories, id: \.self) {
+                        Text($0)
+                    }
+                }
+                .pickerStyle(.menu)
+                
                 ForEach(searchResults, id: \.self) {fish in
                     FishListCell(fish: fish)
                 }
