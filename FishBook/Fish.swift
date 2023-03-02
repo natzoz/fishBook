@@ -22,3 +22,4 @@ let testData = [
     Fish(id: 5, commonName: "Yellowhead butterflyfish", scientificName: "Chaetodon xanthocephalus", group: "Butterflyfishes", family: "Chaetodontidae", habitat: "Reef associated, near live corals", occurrence: "occasional", description: "Description"),
     Fish(id: 6, commonName: "Vagabond butterflyfish", scientificName: "Chaetodon vagabundus", group: "Butterflyfishes", family: "Chaetodontidae", habitat: "Reef associated, near live corals", occurrence: "common", description: "Description")
 ]
+

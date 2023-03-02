@@ -1,5 +1,30 @@
 import SwiftUI
 
+
+
+struct Frontview: View {
+    @State private var randfish = false
+    var body: some View{
+        return Group{
+            if randfish {
+                VStack{
+                    FishDetailPage(fish: allFishData.fishes.randomElement()!)
+                    Button("Go Back") {
+                        randfish.toggle()
+                    }                }
+            }else{
+                VStack{
+                    HomePage(fishData: allFishData)
+                    Button("Random fish") {
+                        randfish.toggle()
+                    }
+                }
+            }
+        }
+    }
+}
+
+
 struct HomePage: View {
     @ObservedObject var fishData: FishData
     @State private var searchText = ""
@@ -56,6 +81,6 @@ struct FishListCell: View {
 
 struct HomePage_Previews: PreviewProvider {
     static var previews: some View {
-        HomePage(fishData: allFishData)
+        Frontview()
     }
 }
