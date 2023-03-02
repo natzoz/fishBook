@@ -3,6 +3,7 @@ import SwiftUI
 struct FamilyPage: View {
     @ObservedObject var fishData: FishData
     @State private var searchText = ""
+    @State private var currentSelection = ""
     
     var body: some View {
         NavigationStack {
