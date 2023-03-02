@@ -114,4 +114,16 @@ class FishDataStore {
         return families
     }
     
+    func getFishAToZ() -> [Fish] {
+            var fishes = getAllFish()
+            fishes = fishes.sorted{ $0.commonName < $1.commonName}
+            return fishes
+        }
+        
+    func getFishZtoA() -> [Fish] {
+        var fishes = getAllFish()
+        fishes = fishes.sorted{ $0.commonName > $1.commonName}
+        return fishes
+    }
+    
 }

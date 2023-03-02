@@ -10,7 +10,6 @@ struct FishListPage: View {
     var body: some View {
         NavigationView {
             List {
-                
                 Picker("Filter", selection: $selection) {
                     ForEach(categories, id: \.self) {
                         Text($0)
