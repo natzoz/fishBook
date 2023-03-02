@@ -6,7 +6,7 @@ struct FishBookApp: App {
     
     var body: some Scene {
         WindowGroup {
-            FishListPage(fishData: allFishData)
+            FamilyPage(fishData: allFishData)
         }
     }
 }
