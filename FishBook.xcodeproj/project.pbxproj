@@ -20,6 +20,7 @@
 		D4EF4BC0299ED2C40093670B /* Fish.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EF4BBF299ED2C40093670B /* Fish.swift */; };
 		D4EF4BC2299EDADA0093670B /* Fish.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4EF4BC1299EDADA0093670B /* Fish.xcassets */; };
 		D4EF4BC4299EE3380093670B /* FishDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EF4BC3299EE3380093670B /* FishDetailPage.swift */; };
+		D4FB838629B1430500B303EF /* fishdata.csv in Resources */ = {isa = PBXBuildFile; fileRef = D4FB838529B1430500B303EF /* fishdata.csv */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		D4EF4BBF299ED2C40093670B /* Fish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fish.swift; sourceTree = "<group>"; };
 		D4EF4BC1299EDADA0093670B /* Fish.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Fish.xcassets; sourceTree = "<group>"; };
 		D4EF4BC3299EE3380093670B /* FishDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishDetailPage.swift; sourceTree = "<group>"; };
+		D4FB838529B1430500B303EF /* fishdata.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = fishdata.csv; path = ../../../Downloads/fishdata.csv; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,10 +117,9 @@
 				D4EF4BC3299EE3380093670B /* FishDetailPage.swift */,
 				D4785AD1299ECB040026F1B1 /* Assets.xcassets */,
 				D4785AD3299ECB040026F1B1 /* FishBook.entitlements */,
-				D48C5E9D29AEABBA000FD31C /* fishdata.csv */,
 				D47E981629A565CE00F9C684 /* FishDataStore.swift */,
+				D4FB838529B1430500B303EF /* fishdata.csv */,
 				D4785AD4299ECB040026F1B1 /* Preview Content */,
-				D407B06C29AEA439000A7167 /* FamilyPage.swift */,
 			);
 			path = FishBook;
 			sourceTree = "<group>";
@@ -260,6 +261,7 @@
 			files = (
 				D4785AD6299ECB040026F1B1 /* Preview Assets.xcassets in Resources */,
 				D4EF4BC2299EDADA0093670B /* Fish.xcassets in Resources */,
+				D4FB838629B1430500B303EF /* fishdata.csv in Resources */,
 				D4785AD2299ECB040026F1B1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
