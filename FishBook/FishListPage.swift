@@ -7,7 +7,7 @@ struct FishListPage: View {
     @State private var selectionSort = "By Name: A to Z"
     
     let categoriesFilter = ["All Fish", "Group", "Family", "Occurrence", "Habitat"]
-    let categoriesSort = ["By Name: A to Z", "By Name: Z to A", "By Rarity: Common to Rare", "By Rarity: Rare to Common"]
+    let categoriesSort = ["By Name: A to Z", "By Name: Z to A", "By Occurrence: Common to Rare", "By Occurrence: Rare to Common"]
     
     var body: some View {
         NavigationView {
