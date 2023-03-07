@@ -7,7 +7,7 @@ struct FishListPage: View {
     @State private var selectionSort = "By Name: A to Z"
     
     let categoriesFilter = ["All Fish", "Group", "Family", "Occurrence", "Habitat"]
-    let categoriesSort = ["By Name: A to Z", "By Name: Z to A", "By Occurrence: Common to Rare", "By Occurrence: Rare to Common"]
+    let categoriesSort = ["By Name: A to Z", "By Name: Z to A", "By Scientific Name: A to Z", "By Scientific Name: Z to A"]
     
     var body: some View {
         NavigationView {
@@ -81,10 +81,10 @@ struct FishListPage: View {
             resultList = inputList.sorted{ $0.commonName < $1.commonName}
         case "By Name: Z to A":
             resultList = inputList.sorted{ $1.commonName < $0.commonName}
-        case "By Occurrence: Common to Rare":
-            resultList = inputList.sorted{ $0.occurrence < $1.occurrence}
-        case "By Occurrence: Rare to Common":
-            resultList = inputList.sorted{ $1.occurrence < $0.occurrence}
+        case "By Scientific Name: A to Z":
+            resultList = inputList.sorted{ $0.scientificName < $1.scientificName}
+        case "By Scientific Name: Z to A":
+            resultList = inputList.sorted{ $1.scientificName < $0.scientificName}
         default:
             resultList = inputList
         }
