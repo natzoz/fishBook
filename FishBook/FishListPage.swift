@@ -15,9 +15,14 @@ struct FishListPage: View {
                         Text($0)
                     }
                 }
+                .onChange(of: selection, perform: { (value) in
+                    if (selection == "All Fish") {
+                        var fishData = fishAtoZ
+                    }
+                })
                 .pickerStyle(.menu)
                 
-                updateList(data: fishData, selection: selection)
+//                updateList(data: fishData, selection: selection)
                 
                 ForEach(searchResults, id: \.self) {fish in
                     FishListCell(fish: fish)
@@ -31,12 +36,27 @@ struct FishListPage: View {
         .searchable(text: $searchText)
     }
     
-    func updateList(data: FishData, selection: String) -> FishData {
-        if (selection == "All Fish") {
-            let data = fishAtoZ
+//    func updateList(data: FishData, selection: String) -> FishData {
+//        if (selection == "All Fish") {
+//            let data = fishAtoZ
+//        }
+//
+//        return data
+//    }
+    
+    var selectionResult: [Fish] {
+        var resultList: [Fish] = []
+        switch selection {
+        case "All Fish":
+            resultList = FishDataStore.share.getAllFish()
+        case "Family":
+            resultList = FishDataStore.share.getFishByFamily(givenFamily: "Charcharhinidae")
+        case "Habitat":
+            resultList = FishDataStore.share.getFishByHabitat(givenHabitat: "Reef edge/drop offs")
+        default:
+            resultList = FishDataStore.share.getAllFish()
         }
-        
-        return data
+        return resultList
     }
     
     var searchResults: [Fish] {

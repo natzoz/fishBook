@@ -127,6 +127,44 @@ class FishDataStore {
         return families
     }
     
+    func getFishByFamily(givenFamily: String) -> [Fish] {
+        let fishes = getAllFish()
+        var sortedFish: [Fish] = []
+        for fish in fishes {
+            if fish.family == givenFamily {
+                sortedFish.append(fish)
+            }
+        }
+        return sortedFish
+    }
+    
+    func getAllHabitats() -> [String] {
+        var habitats: [String] = []
+        guard let database = db else { return [] }
+        
+        do {
+            for fish in try database.prepare(self.fishes) {
+                if (!habitats.contains(fish[habitat])) {
+                    habitats.append(fish[habitat])
+                }
+            }
+        } catch {
+            print(error)
+        }
+        return habitats
+    }
+    
+    func getFishByHabitat(givenHabitat: String) -> [Fish] {
+        let fishes = getAllFish()
+        var sortedFish: [Fish] = []
+        for fish in fishes {
+            if fish.habitat == givenHabitat {
+                sortedFish.append(fish)
+            }
+        }
+        return sortedFish
+    }
+    
     func getFishAToZ() -> [Fish] {
             var fishes = getAllFish()
             fishes = fishes.sorted{ $0.commonName < $1.commonName}
