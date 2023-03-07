@@ -1,5 +1,76 @@
 import SwiftUI
 
+struct Frontview: View {
+    @State private var randfish = false
+    @State private var view = 0
+    var body: some View{
+        return Group{
+            if view == 0 {
+                VStack{
+                    FishListPage(fishData: allFishData)
+                    HStack{
+                        Button("random fish") {
+                            view = 2
+                        }
+                        Button("family") {
+                            view = 1
+                        }
+                        Button("all fish") {
+                            view = 0
+                        }
+                    }
+                }
+            }else if view == 1{
+                VStack{
+                    FamilyPage(fishData: allFishData)
+                    HStack{
+                        Button("random fish") {
+                            view = 2
+                        }
+                        Button("family") {
+                            view = 1
+                        }
+                        Button("all fish") {
+                            view = 0
+                        }
+                    }
+                }
+            }else if view == 2{
+                VStack{
+                    FishDetailPage(fish: allFishData.fishes.randomElement()!)
+                    HStack{
+                        Button("random fish") {
+                            view = 2
+                        }
+                        Button("family") {
+                            view = 1
+                        }
+                        Button("all fish") {
+                            view = 0
+                        }
+                    }
+                }
+            }
+        }
+//        return Group{
+//            if randfish {
+//                VStack{
+//                    FishDetailPage(fish: allFishData.fishes.randomElement()!)
+//                    Button("Go Back") {
+//                        randfish.toggle()
+//                    }                }
+//            }else{
+//                VStack{
+//                    FishListPage(fishData: allFishData)
+//                    Button("Random fish") {
+//                        randfish.toggle()
+//                    }
+//                }
+//            }
+//        }
+    }
+}
+
 struct FishListPage: View {
     @ObservedObject var fishData: FishData
     @State private var searchText = ""
@@ -14,6 +85,7 @@ struct FishListPage: View {
                     ForEach(categories, id: \.self) {
                         Text($0)
                     }
+                    if 
                 }
 //                .onChange(of: selection, perform: { (value) in
 //                    if (selection == "All Fish") {
@@ -100,6 +172,6 @@ struct FishListCell: View {
 
 struct FishListPage_Previews: PreviewProvider {
     static var previews: some View {
-        FishListPage(fishData: allFishData)
+        Frontview()
     }
 }
