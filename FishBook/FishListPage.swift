@@ -1,10 +1,34 @@
 import SwiftUI
 
+public var viewIndex = 0
+
+struct FrontView: View {
+    @State private var randfish = false
+
+    var body: some View{
+        return Group{
+            if viewIndex == 0 {
+                VStack{
+                    FishListPage(fishData: allFishData)
+                }
+            }else if viewIndex == 1{
+                VStack{
+                    FamilyPage(fishData: allFishData)
+                }
+            }else if viewIndex == 2{
+                VStack{
+                    FishDetailPage(fish: allFishData.fishes.randomElement()!)
+                }
+            }
+        }
+    }
+}
+
 struct FishListPage: View {
     @ObservedObject var fishData: FishData
     @State private var searchText = ""
     @State private var selection = "All Fish"
-    
+
     let categories = ["All Fish", "Group", "Family", "Occurrence", "Habitat"]
     
     var body: some View {
@@ -15,22 +39,21 @@ struct FishListPage: View {
                         Text($0)
                     }
                 }
-//                .onChange(of: selection, perform: { (value) in
-//                    if (selection == "All Fish") {
-//
-//                    }
-//                })
+                .onChange(of: selection, perform: { (value) in
+                    print(selection)
+                    if (selection == "All Fish") {
+                        viewIndex = 0
+                    } else if (selection == "Family") {
+                        viewIndex = 1
+                    } else if (selection == "Habitat") {
+                        viewIndex = 2
+                    }
+                })
                 .pickerStyle(.menu)
                 
-//                updateList(data: fishData, selection: selection)
-                
-                ForEach(selectionResult, id: \.self) {
-                    fish in FishListCell(fish: fish)
+                ForEach(searchResults, id: \.self) {fish in
+                    FishListCell(fish: fish)
                 }
-                
-//                ForEach(searchResults, id: \.self) {fish in
-//                    FishListCell(fish: fish)
-//                }
             }
             .navigationTitle("Fish Book")
             
@@ -39,14 +62,6 @@ struct FishListPage: View {
         }
         .searchable(text: $searchText)
     }
-    
-//    func updateList(data: FishData, selection: String) -> FishData {
-//        if (selection == "All Fish") {
-//            let data = fishAtoZ
-//        }
-//
-//        return data
-//    }
     
     var selectionResult: [Fish] {
         var resultList: [Fish] = []
@@ -100,6 +115,7 @@ struct FishListCell: View {
 
 struct FishListPage_Previews: PreviewProvider {
     static var previews: some View {
-        FishListPage(fishData: allFishData)
+//        FishListPage(fishData: allFishData)
+        FrontView()
     }
 }
