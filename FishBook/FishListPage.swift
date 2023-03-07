@@ -34,13 +34,13 @@ struct FishListPage: View {
                 
 //                updateList(data: fishData, selection: selection)
                 
-                ForEach(selectionResult, id: \.self) {
-                    fish in FishListCell(fish: fish)
-                }
-                
-//                ForEach(searchResults, id: \.self) {fish in
-//                    FishListCell(fish: fish)
+//                ForEach(selectionResult, id: \.self) {
+//                    fish in FishListCell(fish: fish)
 //                }
+                
+                ForEach(searchResults, id: \.self) {fish in
+                    FishListCell(fish: fish)
+                }
             }
             .navigationTitle("Fish Book")
             
@@ -94,9 +94,9 @@ struct FishListPage: View {
     var searchResults: [Fish] {
         var resultList: [Fish] = []
         if searchText.isEmpty {
-            return fishData.fishes
+            return selectionResult
         } else {
-            for fish in fishData.fishes {
+            for fish in selectionResult {
                 if (fish.commonName.localizedCaseInsensitiveContains(searchText) || fish.scientificName.localizedCaseInsensitiveContains(searchText)) {
                     resultList.append(fish)
                 }
