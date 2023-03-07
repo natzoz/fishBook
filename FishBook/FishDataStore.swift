@@ -59,11 +59,12 @@ class FishDataStore {
             insert()
             print("Table Created...")
         } catch {
+            refresh()
             print(error)
         }
     }
     
-     private func insert() {
+    private func insert() {
         let url = Bundle.main.url(forResource: "fishdata", withExtension: "csv")!
         let datatable = try? DataFrame(contentsOfCSVFile: url)
         let rowcount = datatable?.rows.count
@@ -82,6 +83,18 @@ class FishDataStore {
         } catch {
             print("insertion failed: \(error)")
         }
+    }
+    
+    private func refresh() {
+        let table = Table("fish")
+        let drop = table.drop(ifExists: true)
+        do{
+            try db!.run(drop)
+            print("refreshed")
+        } catch {
+            print(error)
+        }
+        createTable()
     }
     
     func getAllFish() -> [Fish] {
