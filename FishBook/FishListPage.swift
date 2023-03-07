@@ -17,6 +17,8 @@ struct FishListPage: View {
                         Text($0)
                     }
                 }
+                .pickerStyle(.menu)
+                
                 Picker("Sort", selection: $selectionSort) {
                     ForEach(categoriesSort, id: \.self) {
                         Text($0)
