@@ -68,10 +68,10 @@ struct FishListPage: View {
         default:
             resultList = FishDataStore.share.getAllFish()
         }
-        return sorted(inputList: resultList)
+        return sortList(inputList: resultList)
     }
     
-    func sorted(inputList: [Fish]) -> [Fish] {
+    func sortList(inputList: [Fish]) -> [Fish] {
         var resultList: [Fish] = inputList
         print("sorting")
         switch selectionSort {
