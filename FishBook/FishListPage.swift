@@ -15,18 +15,22 @@ struct FishListPage: View {
                         Text($0)
                     }
                 }
-                .onChange(of: selection, perform: { (value) in
-                    if (selection == "All Fish") {
-                        var fishData = fishAtoZ
-                    }
-                })
+//                .onChange(of: selection, perform: { (value) in
+//                    if (selection == "All Fish") {
+//
+//                    }
+//                })
                 .pickerStyle(.menu)
                 
 //                updateList(data: fishData, selection: selection)
                 
-                ForEach(searchResults, id: \.self) {fish in
-                    FishListCell(fish: fish)
+                ForEach(selectionResult, id: \.self) {
+                    fish in FishListCell(fish: fish)
                 }
+                
+//                ForEach(searchResults, id: \.self) {fish in
+//                    FishListCell(fish: fish)
+//                }
             }
             .navigationTitle("Fish Book")
             
