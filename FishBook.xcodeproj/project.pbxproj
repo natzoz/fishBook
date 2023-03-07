@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D43F991729B1465E00554DC2 /* FamilyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43F991629B1465E00554DC2 /* FamilyPage.swift */; };
 		D465B6F329A56302002B0F06 /* FishData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D465B6F229A56302002B0F06 /* FishData.swift */; };
 		D4785ACE299ECB040026F1B1 /* FishBookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4785ACD299ECB040026F1B1 /* FishBookApp.swift */; };
-		D4785AD0299ECB040026F1B1 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4785ACF299ECB040026F1B1 /* HomePage.swift */; };
+		D4785AD0299ECB040026F1B1 /* FishListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4785ACF299ECB040026F1B1 /* FishListPage.swift */; };
 		D4785AD2299ECB040026F1B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4785AD1299ECB040026F1B1 /* Assets.xcassets */; };
 		D4785AD6299ECB040026F1B1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4785AD5299ECB040026F1B1 /* Preview Assets.xcassets */; };
 		D4785AE0299ECB040026F1B1 /* FishBookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4785ADF299ECB040026F1B1 /* FishBookTests.swift */; };
@@ -20,6 +21,7 @@
 		D4EF4BC0299ED2C40093670B /* Fish.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EF4BBF299ED2C40093670B /* Fish.swift */; };
 		D4EF4BC2299EDADA0093670B /* Fish.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4EF4BC1299EDADA0093670B /* Fish.xcassets */; };
 		D4EF4BC4299EE3380093670B /* FishDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EF4BC3299EE3380093670B /* FishDetailPage.swift */; };
+		D4FB838629B1430500B303EF /* fishdata.csv in Resources */ = {isa = PBXBuildFile; fileRef = D4FB838529B1430500B303EF /* fishdata.csv */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,10 +42,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D43F991629B1465E00554DC2 /* FamilyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyPage.swift; sourceTree = "<group>"; };
 		D465B6F229A56302002B0F06 /* FishData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishData.swift; sourceTree = "<group>"; };
 		D4785ACA299ECB040026F1B1 /* FishBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FishBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4785ACD299ECB040026F1B1 /* FishBookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishBookApp.swift; sourceTree = "<group>"; };
-		D4785ACF299ECB040026F1B1 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
+		D4785ACF299ECB040026F1B1 /* FishListPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishListPage.swift; sourceTree = "<group>"; };
 		D4785AD1299ECB040026F1B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D4785AD3299ECB040026F1B1 /* FishBook.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FishBook.entitlements; sourceTree = "<group>"; };
 		D4785AD5299ECB040026F1B1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -56,6 +59,7 @@
 		D4EF4BBF299ED2C40093670B /* Fish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fish.swift; sourceTree = "<group>"; };
 		D4EF4BC1299EDADA0093670B /* Fish.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Fish.xcassets; sourceTree = "<group>"; };
 		D4EF4BC3299EE3380093670B /* FishDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishDetailPage.swift; sourceTree = "<group>"; };
+		D4FB838529B1430500B303EF /* fishdata.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = fishdata.csv; path = ../../../Downloads/fishdata.csv; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,14 +115,14 @@
 				D4785ACD299ECB040026F1B1 /* FishBookApp.swift */,
 				D4EF4BBF299ED2C40093670B /* Fish.swift */,
 				D4EF4BC1299EDADA0093670B /* Fish.xcassets */,
-				D4785ACF299ECB040026F1B1 /* HomePage.swift */,
+				D4785ACF299ECB040026F1B1 /* FishListPage.swift */,
 				D4EF4BC3299EE3380093670B /* FishDetailPage.swift */,
 				D4785AD1299ECB040026F1B1 /* Assets.xcassets */,
 				D4785AD3299ECB040026F1B1 /* FishBook.entitlements */,
-				D48C5E9D29AEABBA000FD31C /* fishdata.csv */,
 				D47E981629A565CE00F9C684 /* FishDataStore.swift */,
+				D4FB838529B1430500B303EF /* fishdata.csv */,
 				D4785AD4299ECB040026F1B1 /* Preview Content */,
-				D407B06C29AEA439000A7167 /* FamilyPage.swift */,
+				D43F991629B1465E00554DC2 /* FamilyPage.swift */,
 			);
 			path = FishBook;
 			sourceTree = "<group>";
@@ -260,6 +264,7 @@
 			files = (
 				D4785AD6299ECB040026F1B1 /* Preview Assets.xcassets in Resources */,
 				D4EF4BC2299EDADA0093670B /* Fish.xcassets in Resources */,
+				D4FB838629B1430500B303EF /* fishdata.csv in Resources */,
 				D4785AD2299ECB040026F1B1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,8 +290,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4785AD0299ECB040026F1B1 /* HomePage.swift in Sources */,
+				D4785AD0299ECB040026F1B1 /* FishListPage.swift in Sources */,
 				D4EF4BC4299EE3380093670B /* FishDetailPage.swift in Sources */,
+				D43F991729B1465E00554DC2 /* FamilyPage.swift in Sources */,
 				D47E981729A565CE00F9C684 /* FishDataStore.swift in Sources */,
 				D465B6F329A56302002B0F06 /* FishData.swift in Sources */,
 				D4EF4BC0299ED2C40093670B /* Fish.swift in Sources */,

@@ -15,7 +15,7 @@ class FishDataStore {
     private let group = Expression<String>("group")
     private let family = Expression<String>("family")
     private let habitat = Expression<String>("habitat")
-    private let occurance = Expression<String>("occurance")
+    private let occurrence = Expression<String>("occurrence")
     private let description = Expression<String>("description")
     
     static let share = FishDataStore()
@@ -53,17 +53,18 @@ class FishDataStore {
                 table.column(group)
                 table.column(family)
                 table.column(habitat)
-                table.column(occurance)
+                table.column(occurrence)
                 table.column(description)
             })
             insert()
             print("Table Created...")
         } catch {
+            refresh()
             print(error)
         }
     }
     
-     private func insert() {
+    private func insert() {
         let url = Bundle.main.url(forResource: "fishdata", withExtension: "csv")!
         let datatable = try? DataFrame(contentsOfCSVFile: url)
         let rowcount = datatable?.rows.count
@@ -75,7 +76,7 @@ class FishDataStore {
                     group <- (datatable![row: i][0, String.self])!,
                     family <- (datatable![row: i][1, String.self])!,
                     habitat <- (datatable![row: i][5, String.self])!,
-                    occurance <- (datatable![row: i][4, String.self])!,
+                    occurrence <- (datatable![row: i][4, String.self])!,
                     description <- "Description"))
             }
             print("Inserted " , rowcount! , " fish")
@@ -84,13 +85,25 @@ class FishDataStore {
         }
     }
     
+    private func refresh() {
+        let table = Table("fish")
+        let drop = table.drop(ifExists: true)
+        do{
+            try db!.run(drop)
+            print("refreshed")
+        } catch {
+            print(error)
+        }
+        createTable()
+    }
+    
     func getAllFish() -> [Fish] {
         var fishes: [Fish] = []
         guard let database = db else { return [] }
         
         do {
             for fish in try database.prepare(self.fishes) {
-                fishes.append(Fish(id: fish[id], commonName: fish[commonName], scientificName: fish[scientificName], group: fish[group], family: fish[family], habitat: fish[habitat], occurrence: fish[occurance], description: fish[description]))
+                fishes.append(Fish(id: fish[id], commonName: fish[commonName], scientificName: fish[scientificName], group: fish[group], family: fish[family], habitat: fish[habitat], occurrence: fish[occurrence], description: fish[description]))
             }
         } catch {
             print(error)
@@ -112,6 +125,56 @@ class FishDataStore {
             print(error)
         }
         return families
+    }
+    
+    func getFishByFamily(givenFamily: String) -> [Fish] {
+        let fishes = getAllFish()
+        var sortedFish: [Fish] = []
+        for fish in fishes {
+            if fish.family == givenFamily {
+                sortedFish.append(fish)
+            }
+        }
+        return sortedFish
+    }
+    
+    func getAllHabitats() -> [String] {
+        var habitats: [String] = []
+        guard let database = db else { return [] }
+        
+        do {
+            for fish in try database.prepare(self.fishes) {
+                if (!habitats.contains(fish[habitat])) {
+                    habitats.append(fish[habitat])
+                }
+            }
+        } catch {
+            print(error)
+        }
+        return habitats
+    }
+    
+    func getFishByHabitat(givenHabitat: String) -> [Fish] {
+        let fishes = getAllFish()
+        var sortedFish: [Fish] = []
+        for fish in fishes {
+            if fish.habitat == givenHabitat {
+                sortedFish.append(fish)
+            }
+        }
+        return sortedFish
+    }
+    
+    func getFishAToZ() -> [Fish] {
+            var fishes = getAllFish()
+            fishes = fishes.sorted{ $0.commonName < $1.commonName}
+            return fishes
+        }
+        
+    func getFishZtoA() -> [Fish] {
+        var fishes = getAllFish()
+        fishes = fishes.sorted{ $0.commonName > $1.commonName}
+        return fishes
     }
     
 }
