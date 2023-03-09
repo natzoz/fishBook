@@ -25,22 +25,27 @@ struct FishListPage: View {
                     }
                 }
                 
-//                .onChange(of: selection, perform: { (value) in
-//                    if (selection == "All Fish") {
-//
-//                    }
-//                })
+                //                .onChange(of: selection, perform: { (value) in
+                //                    if (selection == "All Fish") {
+                //
+                //                    }
+                //                })
                 .pickerStyle(.menu)
+                
+                ForEach(searchResults, id: \.self) {fish in
+                    FishListCell(fish: fish)
+                }
+                
+                ForEach(allHabitats, id: \.self) {habitat in
+                    HabitatListCell(habitat: habitat)
+                }
                 
 //                updateList(data: fishData, selection: selection)
                 
-                ForEach(selectionResult, id: \.self) {
-                    fish in FishListCell(fish: fish)
-                }
-                
-//                ForEach(searchResults, id: \.self) {fish in
-//                    FishListCell(fish: fish)
+//                ForEach(selectionResult, id: \.self) {
+//                    fish in FishListCell(fish: fish)
 //                }
+
             }
             .navigationTitle("Fish Book")
             
@@ -61,16 +66,22 @@ struct FishListPage: View {
     var selectionResult: [Fish] {
         var resultList: [Fish] = []
         switch selectionFilter {
-        case "All Fish":
-            resultList = FishDataStore.share.getAllFish()
         case "Family":
             resultList = FishDataStore.share.getFishByFamily(givenFamily: "Charcharhinidae")
         case "Habitat":
-            resultList = FishDataStore.share.getFishByHabitat(givenHabitat: "Reef edge/drop offs")
+            resultList = []
         default:
-            resultList = FishDataStore.share.getAllFish()
+            resultList = fishData.fishes
         }
         return sortList(inputList: resultList)
+    }
+    
+    var allHabitats: [String] {
+        var resultList: [String] = []
+        if selectionFilter == "Habitat" {
+            resultList = FishDataStore.share.getAllHabitats()
+        }
+        return resultList
     }
     
     func sortList(inputList: [Fish]) -> [Fish] {
@@ -94,15 +105,30 @@ struct FishListPage: View {
     var searchResults: [Fish] {
         var resultList: [Fish] = []
         if searchText.isEmpty {
-            return fishData.fishes
+            return selectionResult
         } else {
-            for fish in fishData.fishes {
+            for fish in selectionResult {
                 if (fish.commonName.localizedCaseInsensitiveContains(searchText) || fish.scientificName.localizedCaseInsensitiveContains(searchText)) {
                     resultList.append(fish)
                 }
             }
             return resultList
         }
+    }
+}
+
+struct HabitatListCell: View {
+    var habitat: String
+    let gesture = TapGesture().onEnded {
+            print("Gesture Hit")
+        }
+    
+    var body: some View {
+        NavigationLink(destination: FishListPage(fishData: FishData(fishes: FishDataStore.share.getFishByHabitat(givenHabitat: habitat)))){
+            Text(habitat)
+        }
+//        Text(habitat)
+//            .simultaneousGesture(gesture)
     }
 }
 
