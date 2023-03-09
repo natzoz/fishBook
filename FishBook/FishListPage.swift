@@ -3,18 +3,28 @@ import SwiftUI
 struct FishListPage: View {
     @ObservedObject var fishData: FishData
     @State private var searchText = ""
-    @State private var selection = "All Fish"
+    @State private var selectionFilter = "All Fish"
+    @State private var selectionSort = "By Name: A to Z"
     
-    let categories = ["All Fish", "Group", "Family", "Occurrence", "Habitat"]
+    let categoriesFilter = ["All Fish", "Group", "Family", "Occurrence", "Habitat"]
+    let categoriesSort = ["By Name: A to Z", "By Name: Z to A", "By Scientific Name: A to Z", "By Scientific Name: Z to A"]
     
     var body: some View {
         NavigationView {
             List {
-                Picker("Filter", selection: $selection) {
-                    ForEach(categories, id: \.self) {
+                Picker("Filter", selection: $selectionFilter) {
+                    ForEach(categoriesFilter, id: \.self) {
                         Text($0)
                     }
                 }
+                .pickerStyle(.menu)
+                
+                Picker("Sort", selection: $selectionSort) {
+                    ForEach(categoriesSort, id: \.self) {
+                        Text($0)
+                    }
+                }
+                
 //                .onChange(of: selection, perform: { (value) in
 //                    if (selection == "All Fish") {
 //
@@ -50,7 +60,7 @@ struct FishListPage: View {
     
     var selectionResult: [Fish] {
         var resultList: [Fish] = []
-        switch selection {
+        switch selectionFilter {
         case "All Fish":
             resultList = FishDataStore.share.getAllFish()
         case "Family":
@@ -59,6 +69,24 @@ struct FishListPage: View {
             resultList = FishDataStore.share.getFishByHabitat(givenHabitat: "Reef edge/drop offs")
         default:
             resultList = FishDataStore.share.getAllFish()
+        }
+        return sortList(inputList: resultList)
+    }
+    
+    func sortList(inputList: [Fish]) -> [Fish] {
+        var resultList: [Fish] = inputList
+        print("sorting")
+        switch selectionSort {
+        case "By Name: A to Z":
+            resultList = inputList.sorted{ $0.commonName < $1.commonName}
+        case "By Name: Z to A":
+            resultList = inputList.sorted{ $1.commonName < $0.commonName}
+        case "By Scientific Name: A to Z":
+            resultList = inputList.sorted{ $0.scientificName < $1.scientificName}
+        case "By Scientific Name: Z to A":
+            resultList = inputList.sorted{ $1.scientificName < $0.scientificName}
+        default:
+            resultList = inputList
         }
         return resultList
     }
