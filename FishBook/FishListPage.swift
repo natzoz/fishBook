@@ -24,18 +24,18 @@ struct FishListPage: View {
                         Text($0)
                     }
                 }
-                
-//                .onChange(of: selection, perform: { (value) in
-//                    if (selection == "All Fish") {
-//
-//                    }
-//                })
                 .pickerStyle(.menu)
-                
-//                updateList(data: fishData, selection: selection)
                 
                 ForEach(selectionResult, id: \.self) {
                     fish in FishListCell(fish: fish)
+                }
+                
+                ForEach(allHabitats, id: \.self) {habitat in
+                    HabitatListCell(habitat: habitat)
+                }
+                
+                ForEach(allFamilies, id: \.self) {family in
+                    FamilyListCell(family: family)
                 }
                 
 //                ForEach(searchResults, id: \.self) {fish in
@@ -50,13 +50,21 @@ struct FishListPage: View {
         .searchable(text: $searchText)
     }
     
-//    func updateList(data: FishData, selection: String) -> FishData {
-//        if (selection == "All Fish") {
-//            let data = fishAtoZ
-//        }
-//
-//        return data
-//    }
+    var allFamilies: [String] {
+        var resultList: [String] = []
+        if selectionFilter == "Family" {
+            resultList = FishDataStore.share.getAllFamilies()
+        }
+        return resultList
+    }
+    
+    var allHabitats: [String] {
+        var resultList: [String] = []
+        if selectionFilter == "Habitat" {
+            resultList = FishDataStore.share.getAllHabitats()
+        }
+        return resultList
+    }
     
     var selectionResult: [Fish] {
         var resultList: [Fish] = []
@@ -64,9 +72,9 @@ struct FishListPage: View {
         case "All Fish":
             resultList = FishDataStore.share.getAllFish()
         case "Family":
-            resultList = FishDataStore.share.getFishByFamily(givenFamily: "Charcharhinidae")
+            resultList = []
         case "Habitat":
-            resultList = FishDataStore.share.getFishByHabitat(givenHabitat: "Reef edge/drop offs")
+            resultList = []
         default:
             resultList = FishDataStore.share.getAllFish()
         }
@@ -102,6 +110,32 @@ struct FishListPage: View {
                 }
             }
             return resultList
+        }
+    }
+}
+
+struct FamilyListCell: View {
+    var family: String
+    let gesture = TapGesture().onEnded {
+            print("Gesture Hit")
+        }
+    
+    var body: some View {
+        NavigationLink(destination: FishListPage(fishData: FishData(fishes: FishDataStore.share.getFishByFamily(givenFamily: family)))){
+            Text(family)
+        }
+    }
+}
+
+struct HabitatListCell: View {
+    var habitat: String
+    let gesture = TapGesture().onEnded {
+            print("Gesture Hit")
+        }
+    
+    var body: some View {
+        NavigationLink(destination: FishListPage(fishData: FishData(fishes: FishDataStore.share.getFishByHabitat(givenHabitat: habitat)))){
+            Text(habitat)
         }
     }
 }
