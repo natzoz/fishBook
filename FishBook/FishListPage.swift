@@ -39,7 +39,7 @@ struct FishListPage: View {
                 ForEach(allHabitats, id: \.self) {habitat in
                     HabitatListCell(habitat: habitat)
                 }
-                
+
 //                updateList(data: fishData, selection: selection)
                 
 //                ForEach(selectionResult, id: \.self) {
@@ -47,7 +47,7 @@ struct FishListPage: View {
 //                }
 
             }
-            .navigationTitle("Fish Book")
+            .navigationTitle("All Fish")
             
             Text("Select a fish to learn more about!")
                 .font(.largeTitle)
@@ -73,7 +73,7 @@ struct FishListPage: View {
         default:
             resultList = fishData.fishes
         }
-        return sortList(inputList: resultList)
+        return sortFishList(inputList: resultList)
     }
     
     var allHabitats: [String] {
@@ -81,10 +81,10 @@ struct FishListPage: View {
         if selectionFilter == "Habitat" {
             resultList = FishDataStore.share.getAllHabitats()
         }
-        return resultList
+        return sortStringList(inputList: resultList)
     }
     
-    func sortList(inputList: [Fish]) -> [Fish] {
+    func sortFishList(inputList: [Fish]) -> [Fish] {
         var resultList: [Fish] = inputList
         print("sorting")
         switch selectionSort {
@@ -99,6 +99,25 @@ struct FishListPage: View {
         default:
             resultList = inputList
         }
+        return resultList
+    }
+    
+    func sortStringList(inputList: [String]) -> [String] {
+        var resultList: [String] = inputList
+        print("sorting")
+        switch selectionSort {
+        case "By Name: A to Z":
+            resultList = inputList.sorted()
+        case "By Name: Z to A":
+            resultList = (inputList.sorted()).reversed()
+        case "By Scientific Name: A to Z":
+            resultList = inputList.sorted()
+        case "By Scientific Name: Z to A":
+            resultList = (inputList.sorted()).reversed()
+        default:
+            resultList = inputList
+        }
+        print(resultList)
         return resultList
     }
     
@@ -127,6 +146,7 @@ struct HabitatListCell: View {
         NavigationLink(destination: FishListPage(fishData: FishData(fishes: FishDataStore.share.getFishByHabitat(givenHabitat: habitat)))){
             Text(habitat)
         }
+        .navigationTitle("Habitats")
 //        Text(habitat)
 //            .simultaneousGesture(gesture)
     }
