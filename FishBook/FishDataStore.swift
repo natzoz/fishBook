@@ -138,6 +138,33 @@ class FishDataStore {
         return sortedFish
     }
     
+    func getAllOccurrences() -> [String] {
+        var occurrences: [String] = []
+        guard let database = db else { return [] }
+        
+        do {
+            for fish in try database.prepare(self.fishes) {
+                if (!occurrences.contains(fish[occurrence])) {
+                    occurrences.append(fish[occurrence])
+                }
+            }
+        } catch {
+            print(error)
+        }
+        return occurrences
+    }
+    
+    func getFishByOccurrence(givenOccurrence: String) -> [Fish] {
+        let fishes = getAllFish()
+        var sortedFish: [Fish] = []
+        for fish in fishes {
+            if fish.occurrence == givenOccurrence {
+                sortedFish.append(fish)
+            }
+        }
+        return sortedFish
+    }
+    
     func getAllHabitats() -> [String] {
         var habitats: [String] = []
         guard let database = db else { return [] }
