@@ -46,7 +46,6 @@ struct FishListPage: View {
                     GroupListCell(group: group)
                 }
                 
-
             }
             .navigationTitle("Fish Book")
         }

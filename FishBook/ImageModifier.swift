@@ -1,10 +1,3 @@
-//
-//  ImageModifier.swift
-//  FishBook
-//
-//  Created by Kendal Jones on 3/9/23.
-//
-
 import SwiftUI
 import UIKit
 
