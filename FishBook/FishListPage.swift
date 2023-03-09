@@ -40,6 +40,10 @@ struct FishListPage: View {
                     FamilyListCell(family: family)
                 }
                 
+                ForEach(allGroups, id: \.self) {group in
+                    GroupListCell(group: group)
+                }
+                
 
             }
             .navigationTitle("Fish Book")
@@ -63,12 +67,22 @@ struct FishListPage: View {
         return sortStringList(inputList: resultList)
     }
     
+    var allGroups: [String] {
+        var resultList: [String] = []
+        if selectionFilter == "Group" {
+            resultList = FishDataStore.share.getAllGroups()
+        }
+        return sortStringList(inputList: resultList)
+    }
+    
     var selectionResult: [Fish] {
         var resultList: [Fish] = []
         switch selectionFilter {
         case "Family":
             resultList = []
         case "Habitat":
+            resultList = []
+        case "Group":
             resultList = []
         default:
             resultList = fishData.fishes
@@ -151,6 +165,17 @@ struct HabitatListCell: View {
             Text(habitat)
         }
         .navigationTitle("Habitats")
+    }
+}
+
+struct GroupListCell: View {
+    var group: String
+    
+    var body: some View {
+        NavigationLink(destination: FishListPage(fishData: FishData(fishes: FishDataStore.share.getFishByGroup(givenGroup: group)))){
+            Text(group)
+        }
+        .navigationTitle("Groups")
     }
 }
 

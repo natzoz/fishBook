@@ -165,6 +165,33 @@ class FishDataStore {
         return sortedFish
     }
     
+    func getAllGroups() -> [String] {
+        var groups: [String] = []
+        guard let database = db else { return [] }
+        
+        do {
+            for fish in try database.prepare(self.fishes) {
+                if (!groups.contains(fish[group])) {
+                    groups.append(fish[group])
+                }
+            }
+        } catch {
+            print(error)
+        }
+        return groups
+    }
+    
+    func getFishByGroup(givenGroup: String) -> [Fish] {
+        let fishes = getAllFish()
+        var sortedFish: [Fish] = []
+        for fish in fishes {
+            if fish.group == givenGroup {
+                sortedFish.append(fish)
+            }
+        }
+        return sortedFish
+    }
+    
     func getFishAToZ() -> [Fish] {
             var fishes = getAllFish()
             fishes = fishes.sorted{ $0.commonName < $1.commonName}
