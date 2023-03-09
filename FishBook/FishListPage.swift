@@ -10,7 +10,7 @@ struct FishListPage: View {
     let categoriesSort = ["By Name: A to Z", "By Name: Z to A", "By Scientific Name: A to Z", "By Scientific Name: Z to A"]
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 Picker("Filter", selection: $selectionFilter) {
                     ForEach(categoriesFilter, id: \.self) {
@@ -43,9 +43,6 @@ struct FishListPage: View {
 //                }
             }
             .navigationTitle("Fish Book")
-            
-            Text("Select a fish to learn more about!")
-                .font(.largeTitle)
         }
         .searchable(text: $searchText)
     }
