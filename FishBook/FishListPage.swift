@@ -93,13 +93,6 @@ struct FishListPage: View {
         return sortList(inputList: resultList)
     }
     
-    var allHabitats: [String] {
-        var resultList: [String] = []
-        if selectionFilter == "Habitat" {
-            resultList = FishDataStore.share.getAllHabitats()
-        }
-        return resultList
-    }
     
     func sortList(inputList: [Fish]) -> [Fish] {
         var resultList: [Fish] = inputList
@@ -184,7 +177,7 @@ struct FishListCell: View {
 
 struct FishListPage_Previews: PreviewProvider {
     static var previews: some View {
-//        FishListPage(fishData: allFishData)
-        FrontView()
+        FishListPage(fishData: allFishData)
+//        FrontView()
     }
 }
