@@ -73,11 +73,18 @@ struct FishListPage: View {
         default:
             resultList = fishData.fishes
         }
-        return sortList(inputList: resultList)
+        return sortFishList(inputList: resultList)
     }
     
+    var allHabitats: [String] {
+        var resultList: [String] = []
+        if selectionFilter == "Habitat" {
+            resultList = FishDataStore.share.getAllHabitats()
+        }
+        return sortStringList(inputList: resultList)
+    }
     
-    func sortList(inputList: [Fish]) -> [Fish] {
+    func sortFishList(inputList: [Fish]) -> [Fish] {
         var resultList: [Fish] = inputList
         print("sorting")
         switch selectionSort {
@@ -92,6 +99,25 @@ struct FishListPage: View {
         default:
             resultList = inputList
         }
+        return resultList
+    }
+    
+    func sortStringList(inputList: [String]) -> [String] {
+        var resultList: [String] = inputList
+        print("sorting")
+        switch selectionSort {
+        case "By Name: A to Z":
+            resultList = inputList.sorted()
+        case "By Name: Z to A":
+            resultList = (inputList.sorted()).reversed()
+        case "By Scientific Name: A to Z":
+            resultList = inputList.sorted()
+        case "By Scientific Name: Z to A":
+            resultList = (inputList.sorted()).reversed()
+        default:
+            resultList = inputList
+        }
+        print(resultList)
         return resultList
     }
     
@@ -129,6 +155,9 @@ struct HabitatListCell: View {
         NavigationLink(destination: FishListPage(fishData: FishData(fishes: FishDataStore.share.getFishByHabitat(givenHabitat: habitat)))){
             Text(habitat)
         }
+        .navigationTitle("Habitats")
+//        Text(habitat)
+//            .simultaneousGesture(gesture)
     }
 }
 
