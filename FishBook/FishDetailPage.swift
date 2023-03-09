@@ -50,7 +50,6 @@ struct FishDetailPage: View {
 struct FishDetailPage_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-//            FishDetailPage(fish: FishDataStore.share.getAllFish()[0])
             FishDetailPage(fish: testData[4])
         }
     }

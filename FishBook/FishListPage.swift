@@ -25,26 +25,12 @@ struct FishListPage: View {
                     }
                 }
                 
-                //                .onChange(of: selection, perform: { (value) in
-                //                    if (selection == "All Fish") {
-                //
-                //                    }
-                //                })
                 .pickerStyle(.menu)
                 
                 ForEach(searchResults, id: \.self) {fish in
                     FishListCell(fish: fish)
                 }
                 
-                ForEach(allHabitats, id: \.self) {habitat in
-                    HabitatListCell(habitat: habitat)
-                }
-                
-//                updateList(data: fishData, selection: selection)
-                
-                ForEach(selectionResult, id: \.self) {
-                    fish in FishListCell(fish: fish)
-                }
                 
                 ForEach(allHabitats, id: \.self) {habitat in
                     HabitatListCell(habitat: habitat)
@@ -54,9 +40,6 @@ struct FishListPage: View {
                     FamilyListCell(family: family)
                 }
                 
-//                ForEach(searchResults, id: \.self) {fish in
-//                    FishListCell(fish: fish)
-//                }
 
             }
             .navigationTitle("Fish Book")
@@ -129,9 +112,7 @@ struct FishListPage: View {
 
 struct FamilyListCell: View {
     var family: String
-    let gesture = TapGesture().onEnded {
-            print("Gesture Hit")
-        }
+   
     
     var body: some View {
         NavigationLink(destination: FishListPage(fishData: FishData(fishes: FishDataStore.share.getFishByFamily(givenFamily: family)))){
@@ -142,16 +123,12 @@ struct FamilyListCell: View {
 
 struct HabitatListCell: View {
     var habitat: String
-    let gesture = TapGesture().onEnded {
-            print("Gesture Hit")
-        }
+
     
     var body: some View {
         NavigationLink(destination: FishListPage(fishData: FishData(fishes: FishDataStore.share.getFishByHabitat(givenHabitat: habitat)))){
             Text(habitat)
         }
-//        Text(habitat)
-//            .simultaneousGesture(gesture)
     }
 }
 
@@ -178,6 +155,5 @@ struct FishListCell: View {
 struct FishListPage_Previews: PreviewProvider {
     static var previews: some View {
         FishListPage(fishData: allFishData)
-//        FrontView()
     }
 }
