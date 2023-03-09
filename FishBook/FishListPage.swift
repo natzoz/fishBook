@@ -52,7 +52,7 @@ struct FishListPage: View {
         if selectionFilter == "Family" {
             resultList = FishDataStore.share.getAllFamilies()
         }
-        return resultList
+        return sortStringList(inputList: resultList)
     }
     
     var allHabitats: [String] {
@@ -60,7 +60,7 @@ struct FishListPage: View {
         if selectionFilter == "Habitat" {
             resultList = FishDataStore.share.getAllHabitats()
         }
-        return resultList
+        return sortStringList(inputList: resultList)
     }
     
     var selectionResult: [Fish] {
@@ -76,13 +76,13 @@ struct FishListPage: View {
         return sortFishList(inputList: resultList)
     }
     
-    var allHabitats: [String] {
-        var resultList: [String] = []
-        if selectionFilter == "Habitat" {
-            resultList = FishDataStore.share.getAllHabitats()
-        }
-        return sortStringList(inputList: resultList)
-    }
+//    var allHabitats: [String] {
+//        var resultList: [String] = []
+//        if selectionFilter == "Habitat" {
+//            resultList = FishDataStore.share.getAllHabitats()
+//        }
+//        return sortStringList(inputList: resultList)
+//    }
     
     func sortFishList(inputList: [Fish]) -> [Fish] {
         var resultList: [Fish] = inputList
@@ -144,8 +144,10 @@ struct FamilyListCell: View {
         NavigationLink(destination: FishListPage(fishData: FishData(fishes: FishDataStore.share.getFishByFamily(givenFamily: family)))){
             Text(family)
         }
+        .navigationTitle("Families")
     }
 }
+    
 
 struct HabitatListCell: View {
     var habitat: String
