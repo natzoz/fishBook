@@ -76,13 +76,6 @@ struct FishListPage: View {
         return sortFishList(inputList: resultList)
     }
     
-//    var allHabitats: [String] {
-//        var resultList: [String] = []
-//        if selectionFilter == "Habitat" {
-//            resultList = FishDataStore.share.getAllHabitats()
-//        }
-//        return sortStringList(inputList: resultList)
-//    }
     
     func sortFishList(inputList: [Fish]) -> [Fish] {
         var resultList: [Fish] = inputList
@@ -158,8 +151,6 @@ struct HabitatListCell: View {
             Text(habitat)
         }
         .navigationTitle("Habitats")
-//        Text(habitat)
-//            .simultaneousGesture(gesture)
     }
 }
 
