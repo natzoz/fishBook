@@ -9,6 +9,8 @@ struct FishDetailPage: View {
             Image(fish.imageName)
                 .resizable()
                 .cornerRadius(10)
+                .padding(.horizontal, 10)
+                .shadow(radius: 10)
                 .aspectRatio(contentMode: zoomed ? .fill : .fit)
                 .onTapGesture {
                     withAnimation {
@@ -16,7 +18,18 @@ struct FishDetailPage: View {
                     }
                 }
             VStack(alignment: .leading) {
-                Text(fish.scientificName).font(.title).italic()
+                Text(fish.scientificName)
+                    .font(.title)
+                    .italic()
+                    .padding(.bottom, 3)
+                HStack {
+                    Text("Family:").bold()
+                    Text(fish.family)
+                }
+                HStack {
+                    Text("Group:").bold()
+                    Text(fish.group)
+                }
                 HStack {
                     Text("Occurrence:").bold()
                     Text(fish.occurrence)
@@ -25,22 +38,19 @@ struct FishDetailPage: View {
                     Text("Habitat:").bold()
                     Text(fish.habitat)
                 }
-                HStack {
-                    Text("Description:").bold()
-                    Text(fish.description)
-                }
             }
             .padding(.leading)
             Spacer()
         }
         .navigationTitle(fish.commonName)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 struct FishDetailPage_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            FishDetailPage(fish: FishDataStore.share.getAllFish()[0])
+            FishDetailPage(fish: testData[4])
         }
     }
 }
