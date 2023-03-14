@@ -6,17 +6,8 @@ struct FishDetailPage: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Image(fish.imageName)
-                .resizable()
-                .cornerRadius(10)
-                .padding(.horizontal, 10)
-                .shadow(radius: 10)
-                .aspectRatio(contentMode: zoomed ? .fill : .fit)
-                .onTapGesture {
-                    withAnimation {
-                        zoomed.toggle()
-                    }
-                }
+            ImageSlider()
+                .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height/2)
             VStack(alignment: .leading) {
                 Text(fish.scientificName)
                     .font(.title)
@@ -44,6 +35,24 @@ struct FishDetailPage: View {
         }
         .navigationTitle(fish.commonName)
         .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+struct ImageSlider: View {
+    private let images = ["Heniochus monocerus", "Forcipiger flaviventris", "Heniochus acuminatus"]
+    
+    var body: some View {
+        TabView {
+            ForEach(images, id: \.self) { item in
+                 Image(item)
+                    .resizable()
+                    .cornerRadius(10)
+                    .padding(.horizontal, 10)
+                    .shadow(radius: 10)
+                    .aspectRatio(contentMode: .fit)
+            }
+        }
+        .tabViewStyle(PageTabViewStyle())
     }
 }
 
