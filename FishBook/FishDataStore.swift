@@ -88,18 +88,20 @@ class FishDataStore {
     }
     
     private func checkConnection() -> Bool {
-        guard let url = URL(string: "https://github.com/PeterDrake/sofdev-s23-fish/blob/main/FishBook/fishdata.csv") else { return false }
+        guard let url = URL(string: "https://github.com/PeterDrake/sofdev-s23-fish/blob/sg-qt-mar14/FishBook/fishdata.csv") else { return false }
         let downloadTask = URLSession.shared.downloadTask(with: url) {
             urlOrNil, responseOrNil, errorOrNil in
             guard let fileURL = urlOrNil else { return }
             do {
-                let documentsURL = try
-                FileManager.default.url(for: .documentDirectory,
-                                        in: .userDomainMask,
-                                        appropriateFor: nil,
-                                        create: false)
-                let savedURL = documentsURL.appendingPathComponent(fileURL.lastPathComponent)
-                try FileManager.default.moveItem(at: fileURL, to: savedURL)
+//                let documentsURL = try
+//                FileManager.default.url(for: .documentDirectory,
+//                                        in: .userDomainMask,
+//                                        appropriateFor: nil,
+//                                        create: false)
+                let savedURL = Bundle.main.url(forResource: "fishdata", withExtension: "csv")
+                print("SAVED URL:")
+                print(savedURL!)
+                try FileManager.default.replaceItemAt(savedURL!, withItemAt: fileURL)
             } catch {
                 print ("file error: \(error)")
             }
