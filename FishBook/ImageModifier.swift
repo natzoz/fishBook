@@ -1,8 +1,8 @@
+//
+//  ImageModifier.swift
+//  FishBook
 
-  ImageModifier.swift
-  FishBook
-
-  Created by Kendal Jones on 3/9/23.
+//  Created by Kendal Jones on 3/9/23.
 
 
 import SwiftUI
