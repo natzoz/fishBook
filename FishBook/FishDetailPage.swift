@@ -12,11 +12,7 @@ struct FishDetailPage: View {
                 .padding(.horizontal, 10)
                 .shadow(radius: 10)
                 .aspectRatio(contentMode: zoomed ? .fill : .fit)
-                .onTapGesture {
-                    withAnimation {
-                        zoomed.toggle()
-                    }
-                }
+                .modifier(ImageModifier(contentSize: CGSize(width: 450, height: 250)))
             VStack(alignment: .leading) {
                 Text(fish.scientificName)
                     .font(.title)
