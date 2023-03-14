@@ -59,9 +59,7 @@ class FishDataStore {
             insert()
             print("Table Created...")
         } catch {
-            if checkConnection() == true {
-                refresh()
-            }
+            refresh()
             print(error)
         }
     }
@@ -88,7 +86,7 @@ class FishDataStore {
     }
     
     private func checkConnection() -> Bool {
-        guard let url = URL(string: "https://github.com/PeterDrake/sofdev-s23-fish/blob/sg-qt-mar14/FishBook/fishdata.csv") else { return false }
+        guard let url = URL(string: "https://raw.githubusercontent.com/PeterDrake/sofdev-s23-fish/sg-qt-mar14/FishBook/fishdata.csv?token=GHSAT0AAAAAAB64R54MGOI2U6YZOUPUJYLMZAQ7TIQ") else { return false }
         let downloadTask = URLSession.shared.downloadTask(with: url) {
             urlOrNil, responseOrNil, errorOrNil in
             guard let fileURL = urlOrNil else { return }
@@ -98,13 +96,15 @@ class FishDataStore {
 //                                        in: .userDomainMask,
 //                                        appropriateFor: nil,
 //                                        create: false)
-                let savedURL = Bundle.main.url(forResource: "fishdata", withExtension: "csv")
+                let savedURL = Bundle.main.url(forResource: "fishdata", withExtension: "csv")!
                 print("SAVED URL:")
-                print(savedURL!)
-                try FileManager.default.replaceItemAt(savedURL!, withItemAt: fileURL)
-            } catch {
-                print ("file error: \(error)")
-            }
+                print(savedURL)
+                print("FILE URL:")
+                print(fileURL)
+                try FileManager.default.replaceItemAt(savedURL, withItemAt: fileURL)
+                } catch {
+                    print ("file error: \(error)")
+                }
         }
         downloadTask.resume()
         print("success")
@@ -112,6 +112,7 @@ class FishDataStore {
     }
     
     private func refresh() {
+        checkConnection()
         let table = Table("fish")
         let drop = table.drop(ifExists: true)
         do{
