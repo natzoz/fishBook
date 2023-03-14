@@ -47,7 +47,7 @@ struct FishListPage: View {
                 }
                 
             }
-            .navigationTitle("Fish Book")
+            .navigationTitle("All Fish")
         }
         .searchable(text: $searchText)
     }

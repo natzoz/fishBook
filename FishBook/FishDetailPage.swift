@@ -6,8 +6,17 @@ struct FishDetailPage: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            ImageSlider()
-                .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height/2)
+            if (fish.imageCount <= 1) {
+                Image(fish.imageName)
+                    .resizable()
+                    .cornerRadius(10)
+                    .padding(.horizontal, 10)
+                    .shadow(radius: 10)
+                    .aspectRatio(contentMode: .fit)
+            } else {
+                ImageSlider(fish: fish)
+                    .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height/2)
+            }
             VStack(alignment: .leading) {
                 Text(fish.scientificName)
                     .font(.title)
@@ -39,7 +48,9 @@ struct FishDetailPage: View {
 }
 
 struct ImageSlider: View {
-    private let images = ["Heniochus monocerus", "Forcipiger flaviventris", "Heniochus acuminatus"]
+    var fish: Fish
+//    @State private var images = imageList
+    @State private var images = ["Chaetodon vagabundus", "Chaetodon xanthocephalus", "Chaetodon zanzibarensis"]
     
     var body: some View {
         TabView {
@@ -54,6 +65,17 @@ struct ImageSlider: View {
         }
         .tabViewStyle(PageTabViewStyle())
     }
+ 
+    var imageList: [String] {
+        var resultList: [String] = []
+        if (fish.imageCount > 1) {
+            for i in 1...fish.imageCount {
+                resultList.append(fish.scientificName + String(i))
+            }
+        }
+        return resultList
+    }
+    
 }
 
 struct FishDetailPage_Previews: PreviewProvider {
