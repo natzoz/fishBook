@@ -46,13 +46,11 @@ struct FishListPage: View {
                         Text($0)
                     }
                 }
-                
                 .pickerStyle(.menu)
                 
                 ForEach(searchResults, id: \.self) {fish in
                     FishListCell(fish: fish)
                 }
-                
                 
                 ForEach(allHabitats, id: \.self) {habitat in
                     HabitatListCell(habitat: habitat)
@@ -62,11 +60,26 @@ struct FishListPage: View {
                     FamilyListCell(family: family)
                 }
                 
-
+                ForEach(allOccurrences, id: \.self) {occurrence in
+                    OccurrenceListCell(occurrence: occurrence)
+                }
+                
+                ForEach(allGroups, id: \.self) {group in
+                    GroupListCell(group: group)
+                }
+                
             }
             .navigationTitle("Fish Book")
         }
         .searchable(text: $searchText)
+    }
+    
+    var allOccurrences: [String] {
+        var resultList: [String] = []
+        if selectionFilter == "Occurrence" {
+            resultList = FishDataStore.share.getAllOccurrences()
+        }
+        return sortStringList(inputList: resultList)
     }
     
     var allFamilies: [String] {
@@ -85,12 +98,24 @@ struct FishListPage: View {
         return sortStringList(inputList: resultList)
     }
     
+    var allGroups: [String] {
+        var resultList: [String] = []
+        if selectionFilter == "Group" {
+            resultList = FishDataStore.share.getAllGroups()
+        }
+        return sortStringList(inputList: resultList)
+    }
+    
     var selectionResult: [Fish] {
         var resultList: [Fish] = []
         switch selectionFilter {
         case "Family":
             resultList = []
         case "Habitat":
+            resultList = []
+        case "Group":
+            resultList = []
+        case "Occurrence":
             resultList = []
         default:
             resultList = fishData.fishes
@@ -101,7 +126,6 @@ struct FishListPage: View {
     
     func sortFishList(inputList: [Fish]) -> [Fish] {
         var resultList: [Fish] = inputList
-        print("sorting")
         switch selectionSort {
         case "By Name: A to Z":
             resultList = inputList.sorted{ $0.commonName < $1.commonName}
@@ -119,7 +143,6 @@ struct FishListPage: View {
     
     func sortStringList(inputList: [String]) -> [String] {
         var resultList: [String] = inputList
-        print("sorting")
         switch selectionSort {
         case "By Name: A to Z":
             resultList = inputList.sorted()
@@ -132,7 +155,6 @@ struct FishListPage: View {
         default:
             resultList = inputList
         }
-        print(resultList)
         return resultList
     }
     
@@ -151,10 +173,20 @@ struct FishListPage: View {
     }
 }
 
+struct OccurrenceListCell: View {
+    var occurrence: String
+   
+    var body: some View {
+        NavigationLink(destination: FishListPage(fishData: FishData(fishes: FishDataStore.share.getFishByOccurrence(givenOccurrence: occurrence)))){
+            Text(occurrence)
+        }
+        .navigationTitle("Occurrences")
+    }
+}
+
 struct FamilyListCell: View {
     var family: String
    
-    
     var body: some View {
         NavigationLink(destination: FishListPage(fishData: FishData(fishes: FishDataStore.share.getFishByFamily(givenFamily: family)))){
             Text(family)
@@ -167,12 +199,22 @@ struct FamilyListCell: View {
 struct HabitatListCell: View {
     var habitat: String
 
-    
     var body: some View {
         NavigationLink(destination: FishListPage(fishData: FishData(fishes: FishDataStore.share.getFishByHabitat(givenHabitat: habitat)))){
             Text(habitat)
         }
         .navigationTitle("Habitats")
+    }
+}
+
+struct GroupListCell: View {
+    var group: String
+    
+    var body: some View {
+        NavigationLink(destination: FishListPage(fishData: FishData(fishes: FishDataStore.share.getFishByGroup(givenGroup: group)))){
+            Text(group)
+        }
+        .navigationTitle("Groups")
     }
 }
 
