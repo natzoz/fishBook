@@ -65,6 +65,16 @@ struct ImageSlider: View {
         }
         .tabViewStyle(PageTabViewStyle())
     }
+    
+    let fm = FileManager.default
+    let path = Bundle.main.resourcePath!
+    let items = try! fm.contentsOfDirectory(atPath: path)
+
+    for item in items {
+        if item.hasPrefix("nssl") {
+            // this is a picture to load!
+        }
+    }
  
     var imageList: [String] {
         var resultList: [String] = []
