@@ -59,7 +59,9 @@ class FishDataStore {
             insert()
             print("Table Created...")
         } catch {
-            refresh()
+            if checkConnection() == true {
+                refresh()
+            }
             print(error)
         }
     }
@@ -83,6 +85,28 @@ class FishDataStore {
         } catch {
             print("insertion failed: \(error)")
         }
+    }
+    
+    private func checkConnection() -> Bool {
+        guard let url = URL(string: "https://github.com/PeterDrake/sofdev-s23-fish/blob/main/FishBook/fishdata.csv") else { return false }
+        let downloadTask = URLSession.shared.downloadTask(with: url) {
+            urlOrNil, responseOrNil, errorOrNil in
+            guard let fileURL = urlOrNil else { return }
+            do {
+                let documentsURL = try
+                FileManager.default.url(for: .documentDirectory,
+                                        in: .userDomainMask,
+                                        appropriateFor: nil,
+                                        create: false)
+                let savedURL = documentsURL.appendingPathComponent(fileURL.lastPathComponent)
+                try FileManager.default.moveItem(at: fileURL, to: savedURL)
+            } catch {
+                print ("file error: \(error)")
+            }
+        }
+        downloadTask.resume()
+        print("success")
+        return true
     }
     
     private func refresh() {
