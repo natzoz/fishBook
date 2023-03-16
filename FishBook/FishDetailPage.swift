@@ -6,17 +6,8 @@ struct FishDetailPage: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            if (fish.imageCount <= 1) {
-                Image(fish.imageName)
-                    .resizable()
-                    .cornerRadius(10)
-                    .padding(.horizontal, 10)
-                    .shadow(radius: 10)
-                    .aspectRatio(contentMode: .fit)
-            } else {
-                ImageSlider(fish: fish)
-                    .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height/2)
-            }
+            ImageSlider(fish: fish)
+                .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height/2)
             VStack(alignment: .leading) {
                 Text(fish.scientificName)
                     .font(.title)
@@ -49,12 +40,10 @@ struct FishDetailPage: View {
 
 struct ImageSlider: View {
     var fish: Fish
-//    @State private var images = imageList
-    @State private var images = ["Chaetodon vagabundus", "Chaetodon xanthocephalus", "Chaetodon zanzibarensis"]
     
     var body: some View {
         TabView {
-            ForEach(images, id: \.self) { item in
+            ForEach(imageList, id: \.self) { item in
                  Image(item)
                     .resizable()
                     .cornerRadius(10)
@@ -65,24 +54,30 @@ struct ImageSlider: View {
         }
         .tabViewStyle(PageTabViewStyle())
     }
-    
-    let fm = FileManager.default
-    let path = Bundle.main.resourcePath!
-    let items = try! fm.contentsOfDirectory(atPath: path)
-
-    for item in items {
-        if item.hasPrefix("nssl") {
-            // this is a picture to load!
-        }
-    }
  
     var imageList: [String] {
         var resultList: [String] = []
-        if (fish.imageCount > 1) {
-            for i in 1...fish.imageCount {
-                resultList.append(fish.scientificName + String(i))
-            }
+        let fileManager = FileManager.default
+        let bundleURL = Bundle.main.bundleURL
+        let assetURL = bundleURL.appendingPathComponent("FishImages.bundle")
+
+        do {
+          let contents = try fileManager.contentsOfDirectory(at: assetURL, includingPropertiesForKeys: [URLResourceKey.nameKey, URLResourceKey.isDirectoryKey], options: .skipsHiddenFiles)
+
+          for item in contents
+          {
+              let imageName = NSString(string: String(item.lastPathComponent)).deletingPathExtension
+              if (imageName.localizedCaseInsensitiveContains(fish.imageName)) {
+                  resultList.append(imageName)
+              }
+          }
+            
+            return resultList
         }
+        catch {
+          print(error)
+        }
+        
         return resultList
     }
     

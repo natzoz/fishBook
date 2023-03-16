@@ -12,7 +12,6 @@ struct Fish: Hashable {
     var description: String
     
     var imageName: String { return scientificName}
-    var imageCount: Int64 = 3
 }
 
 let testData = [
