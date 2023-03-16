@@ -33,7 +33,7 @@ struct Frontview: View {
                 Spacer()
                 VStack{
                     Text("FishBook").font(.title)
-                    ImageSlider()
+                    HomePage_ImageSlider()
                         .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height/3)
                         .onTapGesture{ishidden.toggle()}
                     if ishidden{
@@ -99,5 +99,23 @@ struct Frontview: View {
 struct HomePage_Previews: PreviewProvider {
     static var previews: some View {
         Frontview()
+    }
+}
+
+struct HomePage_ImageSlider: View {
+    @State private var images = ["Chaetodon vagabundus", "Chaetodon madagascarensis", "Chaetodon interruptus"]
+    
+    var body: some View {
+        TabView {
+            ForEach(images, id: \.self) { item in
+                Image(item)
+                    .resizable()
+                    .cornerRadius(10)
+                    .padding(.horizontal, 10)
+                    .shadow(radius: 10)
+                    .aspectRatio(contentMode: .fit)
+            }
+        }
+        .tabViewStyle(PageTabViewStyle())
     }
 }
