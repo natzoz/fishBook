@@ -30,7 +30,6 @@ class FishDataStore {
                 try FileManager.default.createDirectory(atPath: dirPath.path, withIntermediateDirectories: true, attributes: nil)
                 let dbPath = dirPath.appendingPathComponent(Self.STORE_NAME).path
                 db = try Connection(dbPath)
-                // createTable()
                 createTable()
                 print("SQLiteDataStore init successfully at: \(dbPath)")
             } catch {
@@ -86,20 +85,20 @@ class FishDataStore {
         }
     }
     
-    private func checkConnection() -> Bool {
-        guard let url = URL(string: "https://raw.githubusercontent.com/PeterDrake/sofdev-s23-fish/sg-qt-mar14/FishBook/fishdata.csv?token=GHSAT0AAAAAAB64R54MSRID7BZ2BB4Q3UIUZATS5EA") else { return false }
+    private func checkConnection(){
+        guard let url = URL(string: "https://raw.githubusercontent.com/PeterDrake/sofdev-s23-fish/sg-qt-mar14/FishBook/fishdata.csv?token=GHSAT0AAAAAAB64R54MSRID7BZ2BB4Q3UIUZATS5EA") else { return }
         let downloadTask = URLSession.shared.downloadTask(with: url){
             urlOrNil, responseOrNil, errorOrNil in
             guard let fileURL = urlOrNil else { return }
             do {
-                //let savedURL = Bundle.main.url(forResource: "fishdata", withExtension: "csv")!
+                let savedURL = Bundle.main.url(forResource: "fishdata", withExtension: "csv")!
                 let path = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/fishdata.csv")
-//                let savedURL = try FileManager.default.url(for: .itemReplacementDirectory, in: .userDomainMask, appropriateFor: path, create: false)
-                print("SAVED URL:")
+//                print("SAVED URL:")
 //                print(savedURL)
-                print("FILE URL:")
-                print(fileURL)
+//                print("FILE URL:")
+//                print(fileURL)
                 try FileManager.default.replaceItemAt(path, withItemAt: fileURL)
+                try FileManager.default.replaceItemAt(savedURL, withItemAt: fileURL)
                 } catch {
                     print ("file error: \(error)")
                 }
@@ -107,7 +106,6 @@ class FishDataStore {
         }
         downloadTask.resume()
         print("success")
-        return true
     }
     
     private func refresh() {
