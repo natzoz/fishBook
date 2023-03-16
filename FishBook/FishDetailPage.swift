@@ -71,6 +71,9 @@ struct ImageSlider: View {
                   resultList.append(imageName)
               }
           }
+            if (resultList.isEmpty) {
+                resultList.append("")
+            }
             
             return resultList
         }
