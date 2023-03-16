@@ -59,12 +59,13 @@ struct Frontview: View {
                                 .padding(.leading, 8.0)
             
                             Text("Created For:").bold()
-                            VStack{
+                            VStack(alignment: .leading){
                                 Text("Peter Drake")
                                 Text("CS-488-01 Sof. Dev.")
                             }.padding(.leading, 8)
-                        }
-                    }.padding(.trailing, 100)
+                        }.padding(.leading, 30.0)
+                        
+                    }
                     Spacer()
                     
                     Text("Here fish are friends, NOT FOOD").font(.callout)
