@@ -1,7 +1,5 @@
 import SwiftUI
 
-
-
 struct FishListPage: View {
     @ObservedObject var fishData: FishData
     @State private var searchText = ""
@@ -103,7 +101,6 @@ struct FishListPage: View {
         return sortFishList(inputList: resultList)
     }
     
-    
     func sortFishList(inputList: [Fish]) -> [Fish] {
         var resultList: [Fish] = inputList
         switch selectionSort {
@@ -155,12 +152,31 @@ struct FishListPage: View {
 
 struct OccurrenceListCell: View {
     var occurrence: String
+    @State private var searchText = ""
    
     var body: some View {
-        NavigationLink(destination: FishListPage(fishData: FishData(fishes: FishDataStore.share.getFishByOccurrence(givenOccurrence: occurrence)))){
-            Text(occurrence)
-        }
+//        ForEach(searchResults, id: \.self) {item in
+            NavigationLink(destination: FishListPage(fishData: FishData(fishes: FishDataStore.share.getFishByOccurrence(givenOccurrence: occurrence)))){
+                Text(occurrence)
+            }
+//        }
+        
+        
         .navigationTitle("Occurrences")
+    }
+    
+    var searchResults: [String] {
+        var resultList: [String] = []
+        if searchText.isEmpty {
+            return FishDataStore.share.getAllOccurrences()
+        } else {
+            for occurence in FishDataStore.share.getAllOccurrences() {
+                if (occurence.localizedCaseInsensitiveContains(searchText)) {
+                    resultList.append(occurence)
+                }
+            }
+            return resultList
+        }
     }
 }
 
