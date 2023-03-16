@@ -30,6 +30,7 @@ class FishDataStore {
                 try FileManager.default.createDirectory(atPath: dirPath.path, withIntermediateDirectories: true, attributes: nil)
                 let dbPath = dirPath.appendingPathComponent(Self.STORE_NAME).path
                 db = try Connection(dbPath)
+                // createTable()
                 createTable()
                 print("SQLiteDataStore init successfully at: \(dbPath)")
             } catch {
@@ -59,7 +60,7 @@ class FishDataStore {
             insert()
             print("Table Created...")
         } catch {
-            refresh()
+            checkConnection()
             print(error)
         }
     }
@@ -86,25 +87,23 @@ class FishDataStore {
     }
     
     private func checkConnection() -> Bool {
-        guard let url = URL(string: "https://raw.githubusercontent.com/PeterDrake/sofdev-s23-fish/sg-qt-mar14/FishBook/fishdata.csv?token=GHSAT0AAAAAAB64R54MGOI2U6YZOUPUJYLMZAQ7TIQ") else { return false }
-        let downloadTask = URLSession.shared.downloadTask(with: url) {
+        guard let url = URL(string: "https://raw.githubusercontent.com/PeterDrake/sofdev-s23-fish/sg-qt-mar14/FishBook/fishdata.csv?token=GHSAT0AAAAAAB64R54MSRID7BZ2BB4Q3UIUZATS5EA") else { return false }
+        let downloadTask = URLSession.shared.downloadTask(with: url){
             urlOrNil, responseOrNil, errorOrNil in
             guard let fileURL = urlOrNil else { return }
             do {
-//                let documentsURL = try
-//                FileManager.default.url(for: .documentDirectory,
-//                                        in: .userDomainMask,
-//                                        appropriateFor: nil,
-//                                        create: false)
-                let savedURL = Bundle.main.url(forResource: "fishdata", withExtension: "csv")!
+                //let savedURL = Bundle.main.url(forResource: "fishdata", withExtension: "csv")!
+                let path = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/fishdata.csv")
+//                let savedURL = try FileManager.default.url(for: .itemReplacementDirectory, in: .userDomainMask, appropriateFor: path, create: false)
                 print("SAVED URL:")
-                print(savedURL)
+//                print(savedURL)
                 print("FILE URL:")
                 print(fileURL)
-                try FileManager.default.replaceItemAt(savedURL, withItemAt: fileURL)
+                try FileManager.default.replaceItemAt(path, withItemAt: fileURL)
                 } catch {
                     print ("file error: \(error)")
                 }
+                self.refresh()
         }
         downloadTask.resume()
         print("success")
@@ -112,7 +111,6 @@ class FishDataStore {
     }
     
     private func refresh() {
-        checkConnection()
         let table = Table("fish")
         let drop = table.drop(ifExists: true)
         do{
