@@ -12,6 +12,7 @@ struct Frontview: View {
     @State private var randfish = false
     @State private var fishlist = false
     @State private var ishidden = false
+    @State private var ishiddenp2 = false
     var body: some View{
         return Group{
             if randfish {
@@ -34,11 +35,15 @@ struct Frontview: View {
                     Text("FishBook").font(.title)
                     ImageSlider()
                         .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height/3)
-                    
+                        .onTapGesture{ishidden.toggle()}
+                    if ishidden{
                         VStack{
                             Text("Welcome to the world of FISH!!!")
                             Text("gulp gulp gulp").font(.caption)
+                        }.onTapGesture {
+                            ishiddenp2.toggle()
                         }
+                    }
                     
                     Spacer()
                     HStack(alignment: .top){
@@ -67,8 +72,9 @@ struct Frontview: View {
                         
                     }
                     Spacer()
-                    
-                    Text("Here fish are friends, NOT FOOD").font(.callout)
+                    if ishiddenp2{
+                        Text("Here fish are friends, NOT FOOD").font(.callout)
+                    }
                     Spacer()
                     
                     VStack(alignment: .leading){
