@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D43F991729B1465E00554DC2 /* FamilyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43F991629B1465E00554DC2 /* FamilyPage.swift */; };
+		D44DD11F29C3AC01005EED7F /* FishImages.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D44DD11E29C3AC01005EED7F /* FishImages.bundle */; };
+		D44DD12129C3B29C005EED7F /* Fish.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D44DD12029C3B29C005EED7F /* Fish.xcassets */; };
 		D465B6F329A56302002B0F06 /* FishData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D465B6F229A56302002B0F06 /* FishData.swift */; };
 		D4785ACE299ECB040026F1B1 /* FishBookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4785ACD299ECB040026F1B1 /* FishBookApp.swift */; };
 		D4785AD0299ECB040026F1B1 /* FishListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4785ACF299ECB040026F1B1 /* FishListPage.swift */; };
@@ -21,7 +23,6 @@
 		D487E90B29C10C1B001BEFD0 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D487E90A29C10C1B001BEFD0 /* HomePage.swift */; };
 		D49FE06C29B7DE14008F9C2D /* fishdata.csv in Resources */ = {isa = PBXBuildFile; fileRef = D49FE06B29B7DE14008F9C2D /* fishdata.csv */; };
 		D4EF4BC0299ED2C40093670B /* Fish.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EF4BBF299ED2C40093670B /* Fish.swift */; };
-		D4EF4BC2299EDADA0093670B /* Fish.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4EF4BC1299EDADA0093670B /* Fish.xcassets */; };
 		D4EF4BC4299EE3380093670B /* FishDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EF4BC3299EE3380093670B /* FishDetailPage.swift */; };
 		DE3FA1F429BA8AE300BDACBB /* ImageModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3FA1F329BA8AE300BDACBB /* ImageModifier.swift */; };
 /* End PBXBuildFile section */
@@ -45,6 +46,8 @@
 
 /* Begin PBXFileReference section */
 		D43F991629B1465E00554DC2 /* FamilyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyPage.swift; sourceTree = "<group>"; };
+		D44DD11E29C3AC01005EED7F /* FishImages.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FishImages.bundle; path = ../../Downloads/FishImages.bundle; sourceTree = "<group>"; };
+		D44DD12029C3B29C005EED7F /* Fish.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Fish.xcassets; path = ../../../.Trash/Fish.xcassets; sourceTree = "<group>"; };
 		D465B6F229A56302002B0F06 /* FishData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishData.swift; sourceTree = "<group>"; };
 		D4785ACA299ECB040026F1B1 /* FishBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FishBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4785ACD299ECB040026F1B1 /* FishBookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishBookApp.swift; sourceTree = "<group>"; };
@@ -61,7 +64,6 @@
 		D487E90A29C10C1B001BEFD0 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		D49FE06B29B7DE14008F9C2D /* fishdata.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fishdata.csv; sourceTree = "<group>"; };
 		D4EF4BBF299ED2C40093670B /* Fish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fish.swift; sourceTree = "<group>"; };
-		D4EF4BC1299EDADA0093670B /* Fish.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Fish.xcassets; sourceTree = "<group>"; };
 		D4EF4BC3299EE3380093670B /* FishDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishDetailPage.swift; sourceTree = "<group>"; };
 		DE3FA1F329BA8AE300BDACBB /* ImageModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,6 +97,7 @@
 		D4785AC1299ECB040026F1B1 = {
 			isa = PBXGroup;
 			children = (
+				D44DD11E29C3AC01005EED7F /* FishImages.bundle */,
 				D4785ACC299ECB040026F1B1 /* FishBook */,
 				D4785ADE299ECB040026F1B1 /* FishBookTests */,
 				D4785AE8299ECB040026F1B1 /* FishBookUITests */,
@@ -115,10 +118,10 @@
 		D4785ACC299ECB040026F1B1 /* FishBook */ = {
 			isa = PBXGroup;
 			children = (
+				D44DD12029C3B29C005EED7F /* Fish.xcassets */,
 				D465B6F229A56302002B0F06 /* FishData.swift */,
 				D4785ACD299ECB040026F1B1 /* FishBookApp.swift */,
 				D4EF4BBF299ED2C40093670B /* Fish.swift */,
-				D4EF4BC1299EDADA0093670B /* Fish.xcassets */,
 				D4785ACF299ECB040026F1B1 /* FishListPage.swift */,
 				D4EF4BC3299EE3380093670B /* FishDetailPage.swift */,
 				DE3FA1F329BA8AE300BDACBB /* ImageModifier.swift */,
@@ -269,8 +272,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4785AD6299ECB040026F1B1 /* Preview Assets.xcassets in Resources */,
-				D4EF4BC2299EDADA0093670B /* Fish.xcassets in Resources */,
 				D4785AD2299ECB040026F1B1 /* Assets.xcassets in Resources */,
+				D44DD11F29C3AC01005EED7F /* FishImages.bundle in Resources */,
+				D44DD12129C3B29C005EED7F /* Fish.xcassets in Resources */,
 				D49FE06C29B7DE14008F9C2D /* fishdata.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

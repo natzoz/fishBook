@@ -6,7 +6,7 @@ struct FishDetailPage: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            ImageSlider()
+            ImageSlider(fish: fish)
                 .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height/2)
             VStack(alignment: .leading) {
                 Text(fish.scientificName)
@@ -39,11 +39,11 @@ struct FishDetailPage: View {
 }
 
 struct ImageSlider: View {
-    private let images = ["Heniochus monocerus", "Forcipiger flaviventris", "Heniochus acuminatus"]
+    var fish: Fish
     
     var body: some View {
         TabView {
-            ForEach(images, id: \.self) { item in
+            ForEach(imageList, id: \.self) { item in
                  Image(item)
                     .resizable()
                     .cornerRadius(10)
@@ -54,6 +54,33 @@ struct ImageSlider: View {
         }
         .tabViewStyle(PageTabViewStyle())
     }
+ 
+    var imageList: [String] {
+        var resultList: [String] = []
+        let fileManager = FileManager.default
+        let bundleURL = Bundle.main.bundleURL
+        let assetURL = bundleURL.appendingPathComponent("FishImages.bundle")
+
+        do {
+          let contents = try fileManager.contentsOfDirectory(at: assetURL, includingPropertiesForKeys: [URLResourceKey.nameKey, URLResourceKey.isDirectoryKey], options: .skipsHiddenFiles)
+
+          for item in contents
+          {
+              let imageName = NSString(string: String(item.lastPathComponent)).deletingPathExtension
+              if (imageName.localizedCaseInsensitiveContains(fish.imageName)) {
+                  resultList.append(imageName)
+              }
+          }
+            
+            return resultList
+        }
+        catch {
+          print(error)
+        }
+        
+        return resultList
+    }
+    
 }
 
 struct FishDetailPage_Previews: PreviewProvider {
