@@ -19,14 +19,14 @@ struct Frontview: View {
                     FishDetailPage(fish: allFishData.fishes.randomElement()!)
                     Button("Go Back") {
                         randfish.toggle()
-                    }
+                    }.buttonStyle( .bordered)
                 }
             }else if fishlist{
                 VStack{
                     FishListPage(fishData: allFishData)
                     Button("HomePage") {
                         fishlist.toggle()
-                    }
+                    }.buttonStyle( .bordered)
                 }
             }else{
                 Spacer()
@@ -94,6 +94,3 @@ struct HomePage_Previews: PreviewProvider {
         Frontview()
     }
 }
-
-
-
