@@ -1,5 +1,7 @@
 import SwiftUI
 
+
+
 struct FishListPage: View {
     @ObservedObject var fishData: FishData
     @State private var searchText = ""
@@ -47,7 +49,7 @@ struct FishListPage: View {
                 }
                 
             }
-            .navigationTitle("Fish Book")
+            .navigationTitle("All Fish")
         }
         .searchable(text: $searchText)
     }
