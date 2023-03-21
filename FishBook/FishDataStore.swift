@@ -39,6 +39,16 @@ class FishDataStore {
         } else {
             db = nil
         }
+        let imageList = imageList()
+        print(imageList)
+        let allFish = getAllFish()
+        print(allFish)
+        
+        for fish in allFish {
+            if !imageList.contains(fish.imageName){
+                print(fish.imageName + " Not in image bundle")
+            }
+        }
     }
     
     private func createTable() {
@@ -252,6 +262,39 @@ class FishDataStore {
         var fishes = getAllFish()
         fishes = fishes.sorted{ $0.commonName > $1.commonName}
         return fishes
+    }
+    
+    func imageList() -> [String] {
+        var resultList: [String] = []
+        let fileManager = FileManager.default
+        let bundleURL = Bundle.main.bundleURL
+        let assetURL = bundleURL.appendingPathComponent("FishImages.bundle")
+        let allFish = getAllFish()
+
+        do {
+          let contents = try fileManager.contentsOfDirectory(at: assetURL, includingPropertiesForKeys: [URLResourceKey.nameKey, URLResourceKey.isDirectoryKey], options: .skipsHiddenFiles)
+
+          for item in contents
+          {
+              for fish in allFish {
+                  let imageName = NSString(string: String(item.lastPathComponent)).deletingPathExtension
+                  if (imageName.localizedCaseInsensitiveContains(fish.imageName)) {
+                      resultList.append(imageName)
+                  }
+              }
+
+          }
+            if (resultList.isEmpty) {
+                resultList.append("")
+            }
+            
+            return resultList
+        }
+        catch {
+          print(error)
+        }
+        
+        return resultList
     }
     
 }
