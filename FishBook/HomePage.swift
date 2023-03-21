@@ -1,12 +1,4 @@
-//
-//  HomePage.swift
-//  FishBook
-//
-//  Created by cs-488-01 on 3/14/23.
-//
-
 import SwiftUI
-
 
 struct Frontview: View {
     @State private var randfish = false
@@ -38,8 +30,8 @@ struct Frontview: View {
                         .onTapGesture{ishidden.toggle()}
                     if ishidden{
                         VStack{
-                            Text("Welcome to the world of FISH!!!")
-                            Text("gulp gulp gulp").font(.caption)
+                            Text("Welcome to the world of Fish!")
+                            Text("gulb gulb gulb").font(.caption)
                         }.onTapGesture {
                             ishiddenp2.toggle()
                         }
@@ -48,32 +40,37 @@ struct Frontview: View {
                     Spacer()
                     HStack(alignment: .top){
                         VStack(alignment: .leading){
-                            Text("Developed By:").bold()
+                            Text("Developed By:").font(.headline)
                             VStack(alignment: .leading){
                                 Text("Berto Gonzalez")
                                 Text("Sammy Gonzalez")
                                 Text("Kendal Jones")
                                 Text("Quinn Tonelli")
                                 Text("Natalie Zoz")
-                            }.padding(.leading, 8.0)
+                            }
+                            .font(.subheadline)
+                            .padding(.leading, 8.0)
                         }
                         
                         VStack(alignment: .leading){
-                            Text("Data Collector:").bold()
+                            Text("Data Collected By:").font(.headline)
                             Text("Kenneth Clifton")
-                                .padding(.leading, 8.0)
-            
-                            Text("Created For:").bold()
+                                .font(.subheadline)
+                                .padding([.leading, .bottom], 8.0)
+                            
+                            Text("Created For:").font(.headline)
                             VStack(alignment: .leading){
                                 Text("Peter Drake")
-                                Text("CS-488-01 Sof. Dev.")
-                            }.padding(.leading, 8)
+                                Text("CS-488-01 Sof. Dev. 2023")
+                            }
+                            .font(.subheadline)
+                            .padding(.leading, 8)
                         }.padding(.leading, 30.0)
                         
                     }
                     Spacer()
                     if ishiddenp2{
-                        Text("Here fish are friends, NOT FOOD").font(.callout)
+                        Text("Fish are friends, NOT FOOD").font(.callout)
                     }
                     Spacer()
                     
@@ -108,12 +105,16 @@ struct HomePage_ImageSlider: View {
     var body: some View {
         TabView {
             ForEach(images, id: \.self) { item in
-                Image(item)
-                    .resizable()
-                    .cornerRadius(10)
-                    .padding(.horizontal, 10)
-                    .shadow(radius: 10)
-                    .aspectRatio(contentMode: .fit)
+                GeometryReader {proxy in
+                    Image(item)
+                        .resizable()
+                        .cornerRadius(10)
+                        .padding(.horizontal, 10)
+                        .shadow(radius: 10)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height / 3)
+                        .modifier(ImageModifier(contentSize: CGSize(width: proxy.size.width, height: proxy.size.height)))
+                }
             }
         }
         .tabViewStyle(PageTabViewStyle())
