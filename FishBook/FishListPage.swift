@@ -155,11 +155,9 @@ struct OccurrenceListCell: View {
     @State private var searchText = ""
    
     var body: some View {
-//        ForEach(searchResults, id: \.self) {item in
-            NavigationLink(destination: FishListPage(fishData: FishData(fishes: FishDataStore.share.getFishByOccurrence(givenOccurrence: occurrence)))){
-                Text(occurrence)
-            }
-//        }
+        NavigationLink(destination: FishListPage(fishData: FishData(fishes: FishDataStore.share.getFishByOccurrence(givenOccurrence: occurrence)))){
+            Text(occurrence)
+        }
         .navigationTitle("Occurrences")
     }
     

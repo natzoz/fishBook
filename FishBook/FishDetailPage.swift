@@ -2,7 +2,6 @@ import SwiftUI
 
 struct FishDetailPage: View {
     var fish: Fish
-    @State private var zoomed = false
     
     var body: some View {
         VStack(alignment: .leading) {
