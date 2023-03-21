@@ -46,7 +46,7 @@ class FishDataStore {
         
         for fish in allFish {
             if !imageList.contains(fish.imageName){
-                print(fish.imageName + " Not in image bundle")
+                downloadFishPhoto(fishName: fish.imageName)
             }
         }
     }
@@ -116,6 +116,27 @@ class FishDataStore {
         }
         downloadTask.resume()
         print("success")
+    }
+    
+    private func downloadFishPhoto(fishName: String) {
+        if fishName == "Siganus sutor"{
+            guard let url = URL(string: "https://github.com/quinntonelli/fish_book_editing/blob/main/fish_photos/Siganus%20sutor.jpeg") else { return }
+            let downloadTask = URLSession.shared.downloadTask(with: url){
+                urlOrNil, responseOrNil, errorOrNil in
+                guard let fileUrl = urlOrNil else { return }
+                do {
+                    let fishAssets = Bundle.main.url(forResource: "Fish", withExtension: "xcassets")
+                    print(fishAssets)
+                    let fishBundle = Bundle.main.url(forResource: "FishImages", withExtension: "bundle")
+                    print(fishBundle)
+                    try FileManager.default.moveItem(at: fileUrl, to: fishAssets!)
+                    try FileManager.default.moveItem(at: fileUrl, to: fishBundle!)
+                }
+            }
+            downloadTask.resume()
+            print("success")
+        }
+
     }
     
     private func refresh() {
