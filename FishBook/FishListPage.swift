@@ -160,8 +160,6 @@ struct OccurrenceListCell: View {
                 Text(occurrence)
             }
 //        }
-        
-        
         .navigationTitle("Occurrences")
     }
     
