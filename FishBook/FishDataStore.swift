@@ -86,7 +86,7 @@ class FishDataStore {
     }
     
     private func checkConnection(){
-        guard let url = URL(string: "https://cdn.jsdelivr.net/gh/quinntonelli/fish_book_editing/fishdata.csv") else { return }
+        guard let url = URL(string: "https://cdn.jsdelivr.net/gh/quinntonelli/fish_book_editing@latest/fishdata.csv") else { return }
         let downloadTask = URLSession.shared.downloadTask(with: url){
             urlOrNil, responseOrNil, errorOrNil in
             guard let fileURL = urlOrNil else { return }
