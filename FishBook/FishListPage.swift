@@ -8,6 +8,7 @@ struct FishListPage: View {
     
     let categoriesFilter = ["All Fish", "Group", "Family", "Occurrence", "Habitat"]
     let categoriesSort = ["By Name: A to Z", "By Name: Z to A", "By Scientific Name: A to Z", "By Scientific Name: Z to A"]
+    let categoriesSortShortened = ["By Name: A to Z", "By Name: Z to A"]
     
     var body: some View {
         NavigationStack {
@@ -20,8 +21,14 @@ struct FishListPage: View {
                 .pickerStyle(.menu)
                 
                 Picker("Sort", selection: $selectionSort) {
-                    ForEach(categoriesSort, id: \.self) {
-                        Text($0)
+                    if (selectionFilter != "All Fish") {
+                        ForEach(categoriesSortShortened, id: \.self) {
+                            Text($0)
+                        }
+                    } else {
+                        ForEach(categoriesSort, id: \.self) {
+                            Text($0)
+                        }
                     }
                 }
                 .pickerStyle(.menu)
