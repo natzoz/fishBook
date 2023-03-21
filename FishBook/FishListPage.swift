@@ -228,7 +228,7 @@ struct FishByOccurrence: View {
                 }
                 
             }
-            .navigationTitle("All \(fishData.fishes[0].occurrence) Fish")
+            .navigationTitle("\(fishData.fishes[0].occurrence) Fish")
         }
         .searchable(text: $searchText)
     }
