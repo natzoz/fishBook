@@ -59,7 +59,7 @@ class FishDataStore {
             insert()
             print("Table Created...")
         } catch {
-            refresh()
+            checkConnection()
             print(error)
         }
     }
@@ -83,6 +83,29 @@ class FishDataStore {
         } catch {
             print("insertion failed: \(error)")
         }
+    }
+    
+    private func checkConnection(){
+        guard let url = URL(string: "https://cdn.jsdelivr.net/gh/quinntonelli/fish_book_editing@latest/fishdata.csv") else { return }
+        let downloadTask = URLSession.shared.downloadTask(with: url){
+            urlOrNil, responseOrNil, errorOrNil in
+            guard let fileURL = urlOrNil else { return }
+            do {
+                let savedURL = Bundle.main.url(forResource: "fishdata", withExtension: "csv")!
+                let path = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/fishdata.csv")
+//                print("SAVED URL:")
+//                print(savedURL)
+//                print("FILE URL:")
+//                print(fileURL)
+                try FileManager.default.replaceItemAt(path, withItemAt: fileURL)
+                try FileManager.default.replaceItemAt(savedURL, withItemAt: fileURL)
+                } catch {
+                    print ("file error: \(error)")
+                }
+                self.refresh()
+        }
+        downloadTask.resume()
+        print("success")
     }
     
     private func refresh() {
