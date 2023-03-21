@@ -1,5 +1,7 @@
 import SwiftUI
 
+
+
 struct FishListPage: View {
     @ObservedObject var fishData: FishData
     @State private var searchText = ""
@@ -10,7 +12,7 @@ struct FishListPage: View {
     let categoriesSort = ["By Name: A to Z", "By Name: Z to A", "By Scientific Name: A to Z", "By Scientific Name: Z to A"]
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 Picker("Filter", selection: $selectionFilter) {
                     ForEach(categoriesFilter, id: \.self) {
@@ -24,58 +26,86 @@ struct FishListPage: View {
                         Text($0)
                     }
                 }
-                
-//                .onChange(of: selection, perform: { (value) in
-//                    if (selection == "All Fish") {
-//
-//                    }
-//                })
                 .pickerStyle(.menu)
                 
-//                updateList(data: fishData, selection: selection)
-                
-                ForEach(selectionResult, id: \.self) {
-                    fish in FishListCell(fish: fish)
+                ForEach(searchResults, id: \.self) {fish in
+                    FishListCell(fish: fish)
                 }
                 
-//                ForEach(searchResults, id: \.self) {fish in
-//                    FishListCell(fish: fish)
-//                }
+                ForEach(allHabitats, id: \.self) {habitat in
+                    HabitatListCell(habitat: habitat)
+                }
+                
+                ForEach(allFamilies, id: \.self) {family in
+                    FamilyListCell(family: family)
+                }
+                
+                ForEach(allOccurrences, id: \.self) {occurrence in
+                    OccurrenceListCell(occurrence: occurrence)
+                }
+                
+                ForEach(allGroups, id: \.self) {group in
+                    GroupListCell(group: group)
+                }
+                
             }
-            .navigationTitle("Fish Book")
-            
-            Text("Select a fish to learn more about!")
-                .font(.largeTitle)
+            .navigationTitle("All Fish")
         }
         .searchable(text: $searchText)
     }
     
-//    func updateList(data: FishData, selection: String) -> FishData {
-//        if (selection == "All Fish") {
-//            let data = fishAtoZ
-//        }
-//
-//        return data
-//    }
+    var allOccurrences: [String] {
+        var resultList: [String] = []
+        if selectionFilter == "Occurrence" {
+            resultList = FishDataStore.share.getAllOccurrences()
+        }
+        return sortStringList(inputList: resultList)
+    }
+    
+    var allFamilies: [String] {
+        var resultList: [String] = []
+        if selectionFilter == "Family" {
+            resultList = FishDataStore.share.getAllFamilies()
+        }
+        return sortStringList(inputList: resultList)
+    }
+    
+    var allHabitats: [String] {
+        var resultList: [String] = []
+        if selectionFilter == "Habitat" {
+            resultList = FishDataStore.share.getAllHabitats()
+        }
+        return sortStringList(inputList: resultList)
+    }
+    
+    var allGroups: [String] {
+        var resultList: [String] = []
+        if selectionFilter == "Group" {
+            resultList = FishDataStore.share.getAllGroups()
+        }
+        return sortStringList(inputList: resultList)
+    }
     
     var selectionResult: [Fish] {
         var resultList: [Fish] = []
         switch selectionFilter {
-        case "All Fish":
-            resultList = FishDataStore.share.getAllFish()
         case "Family":
-            resultList = FishDataStore.share.getFishByFamily(givenFamily: "Charcharhinidae")
+            resultList = []
         case "Habitat":
-            resultList = FishDataStore.share.getFishByHabitat(givenHabitat: "Reef edge/drop offs")
+            resultList = []
+        case "Group":
+            resultList = []
+        case "Occurrence":
+            resultList = []
         default:
-            resultList = FishDataStore.share.getAllFish()
+            resultList = fishData.fishes
         }
-        return sortList(inputList: resultList)
+        return sortFishList(inputList: resultList)
     }
     
-    func sortList(inputList: [Fish]) -> [Fish] {
+    
+    func sortFishList(inputList: [Fish]) -> [Fish] {
         var resultList: [Fish] = inputList
-        print("sorting")
         switch selectionSort {
         case "By Name: A to Z":
             resultList = inputList.sorted{ $0.commonName < $1.commonName}
@@ -91,18 +121,80 @@ struct FishListPage: View {
         return resultList
     }
     
+    func sortStringList(inputList: [String]) -> [String] {
+        var resultList: [String] = inputList
+        switch selectionSort {
+        case "By Name: A to Z":
+            resultList = inputList.sorted()
+        case "By Name: Z to A":
+            resultList = (inputList.sorted()).reversed()
+        case "By Scientific Name: A to Z":
+            resultList = inputList.sorted()
+        case "By Scientific Name: Z to A":
+            resultList = (inputList.sorted()).reversed()
+        default:
+            resultList = inputList
+        }
+        return resultList
+    }
+    
     var searchResults: [Fish] {
         var resultList: [Fish] = []
         if searchText.isEmpty {
-            return fishData.fishes
+            return selectionResult
         } else {
-            for fish in fishData.fishes {
+            for fish in selectionResult {
                 if (fish.commonName.localizedCaseInsensitiveContains(searchText) || fish.scientificName.localizedCaseInsensitiveContains(searchText)) {
                     resultList.append(fish)
                 }
             }
             return resultList
         }
+    }
+}
+
+struct OccurrenceListCell: View {
+    var occurrence: String
+   
+    var body: some View {
+        NavigationLink(destination: FishListPage(fishData: FishData(fishes: FishDataStore.share.getFishByOccurrence(givenOccurrence: occurrence)))){
+            Text(occurrence)
+        }
+        .navigationTitle("Occurrences")
+    }
+}
+
+struct FamilyListCell: View {
+    var family: String
+   
+    var body: some View {
+        NavigationLink(destination: FishListPage(fishData: FishData(fishes: FishDataStore.share.getFishByFamily(givenFamily: family)))){
+            Text(family)
+        }
+        .navigationTitle("Families")
+    }
+}
+    
+
+struct HabitatListCell: View {
+    var habitat: String
+
+    var body: some View {
+        NavigationLink(destination: FishListPage(fishData: FishData(fishes: FishDataStore.share.getFishByHabitat(givenHabitat: habitat)))){
+            Text(habitat)
+        }
+        .navigationTitle("Habitats")
+    }
+}
+
+struct GroupListCell: View {
+    var group: String
+    
+    var body: some View {
+        NavigationLink(destination: FishListPage(fishData: FishData(fishes: FishDataStore.share.getFishByGroup(givenGroup: group)))){
+            Text(group)
+        }
+        .navigationTitle("Groups")
     }
 }
 
