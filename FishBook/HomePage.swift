@@ -17,10 +17,11 @@ struct Frontview: View {
             }else if fishlist{
                 VStack{
                     FishListPage(fishData: allFishData)
-                    Button("HomePage") {
+                    Button("Home Page") {
                         fishlist.toggle()
                     }.buttonStyle( .bordered)
                 }
+                .ignoresSafeArea(.keyboard)
             }else{
                 Spacer()
                 VStack{
@@ -77,7 +78,7 @@ struct Frontview: View {
                     VStack(alignment: .leading){
                         HStack{
                             Spacer()
-                            Button("Explore our FishBook") {
+                            Button("Explore FishBook") {
                                 fishlist.toggle()
                             }
                             Spacer()
