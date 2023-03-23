@@ -121,7 +121,7 @@ class FishDataStore {
     
     private func downloadFishPhoto(fishName: String) {
         if fishName == "Siganus sutor"{
-            guard let url = URL(string: "https://github.com/quinntonelli/fish_book_editing/blob/main/fish_photos/Siganus%20sutor.jpeg") else { return }
+            guard let url = URL(string: "https://cdn.jsdelivr.net/gh/quinntonelli/fish_book_editing@latest/fish_photos/Siganus%20sutor.jpeg") else { return }
             let downloadTask = URLSession.shared.downloadTask(with: url){
                 urlOrNil, responseOrNil, errorOrNil in
                 guard let fileUrl = urlOrNil else { return }
