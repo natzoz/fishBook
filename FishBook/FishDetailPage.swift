@@ -39,6 +39,7 @@ struct FishDetailPage: View {
 
 struct ImageSlider: View {
     var fish: Fish
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         TabView {
@@ -48,7 +49,7 @@ struct ImageSlider: View {
                         .resizable()
                         .cornerRadius(10)
                         .padding(.horizontal, 10)
-                        .shadow(radius: 10)
+                        .shadow(color: colorScheme == .dark ? Color.white : Color.black, radius: 5)
                         .aspectRatio(contentMode: .fit)
                         .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height / 2)
                         .modifier(ImageModifier(contentSize: CGSize(width: proxy.size.width, height: proxy.size.height)))
