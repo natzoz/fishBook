@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 import SQLite
 import TabularData
 
@@ -125,12 +126,23 @@ class FishDataStore {
                 urlOrNil, responseOrNil, errorOrNil in
                 guard let fileUrl = urlOrNil else { return }
                 do {
-                    let fishAssets = Bundle.main.url(forResource: "Fish", withExtension: "xcassets")
-                    print(fishAssets)
-                    let fishBundle = Bundle.main.url(forResource: "FishImages", withExtension: "bundle")
-                    print(fishBundle)
-                    try FileManager.default.moveItem(at: fileUrl, to: fishAssets!)
-                    try FileManager.default.moveItem(at: fileUrl, to: fishBundle!)
+                    guard let bundleURL = Bundle.main.url(forResource: "FishImages", withExtension: "bundle") else {
+                        print("Could not find FishPhotos.bundle")
+                        return
+                    }
+                    let desktopBundleURL = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/FishImages.bundle")
+                    print(bundleURL)
+                    let newFileURL = desktopBundleURL.appendingPathComponent("Siganus sutor.jpeg")
+                    
+//                    let fishAssets = Bundle.main.url(forResource: "Fish", withExtension: "xcassets")
+//                    print(fishAssets!)
+                    print(newFileURL)
+//                    try FileManager.default.moveItem(at: fileUrl, to: fishAssets!)
+                    try FileManager.default.copyItem(at: fileUrl, to: newFileURL)
+                    guard let data = try? Data(contentsOf: fileUrl) else {return}
+                    let fishPic = UIImage(data: data)
+                } catch {
+                    print("file error: \(error)")
                 }
             }
             downloadTask.resume()
