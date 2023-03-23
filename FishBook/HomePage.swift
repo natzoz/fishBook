@@ -101,7 +101,7 @@ struct HomePage_Previews: PreviewProvider {
 }
 
 struct HomePage_ImageSlider: View {
-    @State private var images = ["Chaetodon vagabundus", "Chaetodon madagascarensis", "Chaetodon interruptus"]
+    @State private var images = ["Chaetodon vagabundus", "Plectorhinchus albovittatus", "Heteroconger hassi"]
     
     var body: some View {
         TabView {
