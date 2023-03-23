@@ -133,10 +133,7 @@ class FishDataStore {
                     let desktopBundleURL = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/FishImages.bundle")
                     print(bundleURL)
                     let newFileURL = desktopBundleURL.appendingPathComponent("Siganus sutor.jpeg")
-//                    let fishAssets = Bundle.main.url(forResource: "Fish", withExtension: "xcassets")
-//                    print(fishAssets!)
                     print(newFileURL)
-//                    try FileManager.default.moveItem(at: fileUrl, to: fishAssets!)
                     try FileManager.default.copyItem(at: fileUrl, to: newFileURL)
                     
                     let desktopAssetURL = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/Fish.xcassets")
@@ -155,6 +152,9 @@ class FishDataStore {
                     print(newAssetFileURL)
 //                    try FileManager.default.moveItem(at: fileUrl, to: fishAssets!)
                     try FileManager.default.copyItem(at: fileUrl, to: newAssetFileURL)
+                    
+                    self.createJsonFileForPhoto(assetURL: imageFolderURL, imageName: fishName)
+                    
                 } catch {
                     print("file error: \(error)")
                 }
@@ -163,6 +163,40 @@ class FishDataStore {
             print("success")
         }
 
+    }
+    
+    private func createJsonFileForPhoto(assetURL: URL, imageName: String){
+        let contents: [String: Any] = [
+            "images": [
+                [
+                    "filename": imageName + ".jpeg",
+                    "idiom": "universal",
+                    "scale": "1x"
+                ],
+                [
+                    "idiom": "universal",
+                    "scale": "2x"
+                ],
+                [
+                    "idiom": "universal",
+                    "scale": "3x"
+                ]
+            ],
+            "info": [
+                "author": "xcode",
+                "version": 1
+            ]
+        ]
+        
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: contents, options: .prettyPrinted)
+            let jsonURL = assetURL.appendingPathComponent("Contents.json")
+            try jsonData.write(to: jsonURL, options: .atomic)
+        } catch {
+            print(error.localizedDescription)
+            return
+        }
+        
     }
     
     private func refresh() {
