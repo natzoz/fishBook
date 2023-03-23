@@ -40,16 +40,19 @@ class FishDataStore {
         } else {
             db = nil
         }
+//        checkAndDownloadPhotos()
+    }
+    
+    func checkAndDownloadPhotos() {
         let imageList = imageList()
-        print(imageList)
         let allFish = getAllFish()
-        print(allFish)
         
         for fish in allFish {
             if !imageList.contains(fish.imageName){
                 downloadFishPhoto(fishName: fish.imageName)
             }
         }
+        print("Photo Download Function Complete.")
     }
     
     private func createTable() {
