@@ -133,14 +133,28 @@ class FishDataStore {
                     let desktopBundleURL = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/FishImages.bundle")
                     print(bundleURL)
                     let newFileURL = desktopBundleURL.appendingPathComponent("Siganus sutor.jpeg")
-                    
 //                    let fishAssets = Bundle.main.url(forResource: "Fish", withExtension: "xcassets")
 //                    print(fishAssets!)
                     print(newFileURL)
 //                    try FileManager.default.moveItem(at: fileUrl, to: fishAssets!)
                     try FileManager.default.copyItem(at: fileUrl, to: newFileURL)
-                    guard let data = try? Data(contentsOf: fileUrl) else {return}
-                    let fishPic = UIImage(data: data)
+                    
+                    let desktopAssetURL = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/Fish.xcassets")
+                    let imageFolderURL = desktopAssetURL.appendingPathComponent("Siganus sutor.imageset")
+                    if !FileManager.default.fileExists(atPath: imageFolderURL.path) {
+                        do {
+                            try FileManager.default.createDirectory(at: imageFolderURL, withIntermediateDirectories: false, attributes: nil)
+                        } catch {
+                            print(error.localizedDescription)
+                            return
+                        }
+                    }
+                    let newAssetFileURL = imageFolderURL.appendingPathComponent("Siganus sutor.jpeg")
+//                    let fishAssets = Bundle.main.url(forResource: "Fish", withExtension: "xcassets")
+//                    print(fishAssets!)
+                    print(newAssetFileURL)
+//                    try FileManager.default.moveItem(at: fileUrl, to: fishAssets!)
+                    try FileManager.default.copyItem(at: fileUrl, to: newAssetFileURL)
                 } catch {
                     print("file error: \(error)")
                 }
