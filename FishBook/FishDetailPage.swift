@@ -2,7 +2,6 @@ import SwiftUI
 
 struct FishDetailPage: View {
     var fish: Fish
-    @State private var zoomed = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -40,16 +39,21 @@ struct FishDetailPage: View {
 
 struct ImageSlider: View {
     var fish: Fish
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         TabView {
             ForEach(imageList, id: \.self) { item in
-                 Image(item)
-                    .resizable()
-                    .cornerRadius(10)
-                    .padding(.horizontal, 10)
-                    .shadow(radius: 10)
-                    .aspectRatio(contentMode: .fit)
+                GeometryReader {proxy in
+                    Image(item)
+                        .resizable()
+                        .cornerRadius(10)
+                        .padding(.horizontal, 10)
+                        .shadow(color: colorScheme == .dark ? Color.white : Color.black, radius: 5)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height / 2)
+                        .modifier(ImageModifier(contentSize: CGSize(width: proxy.size.width, height: proxy.size.height)))
+                }
             }
         }
         .tabViewStyle(PageTabViewStyle())

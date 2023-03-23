@@ -40,7 +40,7 @@ class FishDataStore {
         } else {
             db = nil
         }
-//        checkAndDownloadPhotos()
+        checkAndDownloadPhotos()
     }
     
     func checkAndDownloadPhotos() {
