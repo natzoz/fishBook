@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D43F991729B1465E00554DC2 /* FamilyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43F991629B1465E00554DC2 /* FamilyPage.swift */; };
 		D44DD12329C3BAEE005EED7F /* FishImages.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D44DD12229C3BAEE005EED7F /* FishImages.bundle */; };
 		D44DD12529C3BAFB005EED7F /* Fish.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D44DD12429C3BAFB005EED7F /* Fish.xcassets */; };
 		D465B6F329A56302002B0F06 /* FishData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D465B6F229A56302002B0F06 /* FishData.swift */; };
@@ -45,7 +44,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D43F991629B1465E00554DC2 /* FamilyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyPage.swift; sourceTree = "<group>"; };
 		D44DD12229C3BAEE005EED7F /* FishImages.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FishImages.bundle; sourceTree = "<group>"; };
 		D44DD12429C3BAFB005EED7F /* Fish.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Fish.xcassets; sourceTree = "<group>"; };
 		D465B6F229A56302002B0F06 /* FishData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishData.swift; sourceTree = "<group>"; };
@@ -130,7 +128,6 @@
 				D47E981629A565CE00F9C684 /* FishDataStore.swift */,
 				D49FE06B29B7DE14008F9C2D /* fishdata.csv */,
 				D4785AD4299ECB040026F1B1 /* Preview Content */,
-				D43F991629B1465E00554DC2 /* FamilyPage.swift */,
 				D487E90A29C10C1B001BEFD0 /* HomePage.swift */,
 			);
 			path = FishBook;
@@ -304,7 +301,6 @@
 				D487E90B29C10C1B001BEFD0 /* HomePage.swift in Sources */,
 				D4785AD0299ECB040026F1B1 /* FishListPage.swift in Sources */,
 				D4EF4BC4299EE3380093670B /* FishDetailPage.swift in Sources */,
-				D43F991729B1465E00554DC2 /* FamilyPage.swift in Sources */,
 				D47E981729A565CE00F9C684 /* FishDataStore.swift in Sources */,
 				D465B6F329A56302002B0F06 /* FishData.swift in Sources */,
 				D4EF4BC0299ED2C40093670B /* Fish.swift in Sources */,
@@ -485,7 +481,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 12.6;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = NatalieZoz.FishBook;
+				PRODUCT_BUNDLE_IDENTIFIER = LC.FishBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
@@ -525,7 +521,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 12.6;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = NatalieZoz.FishBook;
+				PRODUCT_BUNDLE_IDENTIFIER = LC.FishBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
