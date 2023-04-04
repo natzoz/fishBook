@@ -44,12 +44,12 @@ class FishDataStore {
     }
     
     func checkAndDownloadPhotos() {
-        let imageList = imageList()
-        let allFish = getAllFish()
+        let bundleList = bundleList()
+        let uploads = uploadList()
         
-        for fish in allFish {
-            if !imageList.contains(fish.imageName){
-                downloadFishPhoto(fishName: fish.imageName)
+        for img in uploads {
+            if (!bundleList.contains(img)){
+                downloadFishPhoto(fishName: img)
             }
         }
         print("Photo Download Function Complete.")
@@ -123,8 +123,8 @@ class FishDataStore {
     }
     
     private func downloadFishPhoto(fishName: String) {
-        if fishName == "Siganus sutor"{
-            guard let url = URL(string: "https://cdn.jsdelivr.net/gh/quinntonelli/fish_book_editing@latest/fish_photos/Siganus%20sutor.jpeg") else { return }
+//        if fishName == "Siganus sutor"{
+            guard let url = URL(string: "https://cdn.jsdelivr.net/gh/quinntonelli/fish_book_editing@latest/fish_photos/\(fishName).jpeg") else { return }
             let downloadTask = URLSession.shared.downloadTask(with: url){
                 urlOrNil, responseOrNil, errorOrNil in
                 guard let fileUrl = urlOrNil else { return }
@@ -135,12 +135,12 @@ class FishDataStore {
                     }
                     let desktopBundleURL = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/FishImages.bundle")
                     print(bundleURL)
-                    let newFileURL = desktopBundleURL.appendingPathComponent("Siganus sutor.jpeg")
+                    let newFileURL = desktopBundleURL.appendingPathComponent("\(fishName).jpeg")
                     print(newFileURL)
                     try FileManager.default.copyItem(at: fileUrl, to: newFileURL)
                     
                     let desktopAssetURL = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/Fish.xcassets")
-                    let imageFolderURL = desktopAssetURL.appendingPathComponent("Siganus sutor.imageset")
+                    let imageFolderURL = desktopAssetURL.appendingPathComponent("\(fishName).imageset")
                     if !FileManager.default.fileExists(atPath: imageFolderURL.path) {
                         do {
                             try FileManager.default.createDirectory(at: imageFolderURL, withIntermediateDirectories: false, attributes: nil)
@@ -149,7 +149,7 @@ class FishDataStore {
                             return
                         }
                     }
-                    let newAssetFileURL = imageFolderURL.appendingPathComponent("Siganus sutor.jpeg")
+                    let newAssetFileURL = imageFolderURL.appendingPathComponent("\(fishName).jpeg")
 //                    let fishAssets = Bundle.main.url(forResource: "Fish", withExtension: "xcassets")
 //                    print(fishAssets!)
                     print(newAssetFileURL)
@@ -164,7 +164,7 @@ class FishDataStore {
             }
             downloadTask.resume()
             print("success")
-        }
+//        }
 
     }
     
@@ -348,30 +348,62 @@ class FishDataStore {
         return fishes
     }
     
-    func imageList() -> [String] {
+    func bundleList() -> [String] {
         var resultList: [String] = []
         let fileManager = FileManager.default
         let bundleURL = Bundle.main.bundleURL
         let assetURL = bundleURL.appendingPathComponent("FishImages.bundle")
-        let allFish = getAllFish()
+//        let allFish = getAllFish()
 
         do {
           let contents = try fileManager.contentsOfDirectory(at: assetURL, includingPropertiesForKeys: [URLResourceKey.nameKey, URLResourceKey.isDirectoryKey], options: .skipsHiddenFiles)
 
           for item in contents
           {
-              for fish in allFish {
-                  let imageName = NSString(string: String(item.lastPathComponent)).deletingPathExtension
-                  if (imageName.localizedCaseInsensitiveContains(fish.imageName)) {
-                      resultList.append(imageName)
-                  }
+              let imageName = NSString(string: String(item.lastPathComponent)).deletingPathExtension
+              if (!resultList.contains(imageName)) {
+                  resultList.append(imageName)
               }
-
           }
             if (resultList.isEmpty) {
                 resultList.append("")
             }
             
+            return resultList
+        }
+        catch {
+          print(error)
+        }
+        
+        return resultList
+    }
+    
+    func uploadList() -> [String] {
+        var resultList: [String] = []
+        let fileManager = FileManager.default
+        let bundleURL = Bundle.main.bundleURL
+//        let assetURL = bundleURL.appendingPathExtension("https://github.com/quinntonelli/fish_book_editing/tree/main/fish_photos")
+        guard let url = URL(string: "https://github.com/quinntonelli/fish_book_editing/tree/main/fish_photos.bundle") else { return [""]}
+        let assetURL = bundleURL.standardizedFileURL(url)
+//        let allFish = getAllFish()
+        
+        print("hello upload list")
+
+        do {
+          let contents = try fileManager.contentsOfDirectory(at: assetURL, includingPropertiesForKeys: [URLResourceKey.nameKey, URLResourceKey.isDirectoryKey], options: .skipsHiddenFiles)
+
+          for item in contents
+          {
+              let imageName = NSString(string: String(item.lastPathComponent)).deletingPathExtension
+              if (!resultList.contains(imageName)) {
+                  resultList.append(imageName)
+                  print(imageName)
+              }
+          }
+            if (resultList.isEmpty) {
+                resultList.append("")
+            }
+                        
             return resultList
         }
         catch {
