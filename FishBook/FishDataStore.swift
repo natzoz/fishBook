@@ -380,46 +380,33 @@ class FishDataStore {
     func uploadList() -> [String] {
         var resultList: [String] = []
         let fileManager = FileManager.default
-//        let bundleURL = Bundle.main.bundleURL
-//        let assetURL = bundleURL.appendingPathExtension("https://github.com/quinntonelli/fish_book_editing/tree/main/fish_photos.bundle")
         
-        guard let url = URL(string: "https://cdn.jsdelivr.net/gh/quinntonelli/fish_book_editing@master/fish_photos/") else { return [] }
+        guard let url = URL(string: "https://cdn.jsdelivr.net/gh/quinntonelli/fish_book_editing@latest/fish_photos/") else { return [] }
         
-        print("\n")
-        print(url)
-        print("\n")
+        print("\n", url, "\n")
         
-        let downloadTask = URLSession.shared.downloadTask(with: url){
-            urlOrNil, responseOrNil, errorOrNil in
-            guard let fileUrl = urlOrNil else { return }
-            
-            do {
-              let contents = try fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: [URLResourceKey.nameKey, URLResourceKey.isDirectoryKey], options: .skipsHiddenFiles)
+        do {
+          let contents = try fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: [URLResourceKey.nameKey, URLResourceKey.isDirectoryKey], options: .skipsHiddenFiles)
 
-              for item in contents
-              {
-                  let imageName = NSString(string: String(item.lastPathComponent)).deletingPathExtension
-                  if (!resultList.contains(imageName)) {
-                      resultList.append(imageName)
-                      print(imageName + " in git")
-                  }
+          for item in contents
+          {
+              let imageName = NSString(string: String(item.lastPathComponent)).deletingPathExtension
+              if (!resultList.contains(imageName)) {
+                  print(imageName, " in git")
+                  resultList.append(imageName)
               }
-                if (resultList.isEmpty) {
-                    resultList.append("")
-                }
+          }
+            if (resultList.isEmpty) {
+                resultList.append("")
             }
-            catch {
-              print(error)
-            }
-        
+            
+            return resultList
         }
-        print(downloadTask)
-        downloadTask.resume()
+        catch {
+          print(error, "\n")
+        }
         
-        print(resultList)
         return resultList
     }
 
-        
-    
 }
