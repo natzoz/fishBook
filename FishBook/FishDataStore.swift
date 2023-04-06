@@ -383,6 +383,11 @@ class FishDataStore {
         
         guard let url = URL(string: "https://cdn.jsdelivr.net/gh/quinntonelli/fish_book_editing@latest/fish_photos/") else { return [] }
         
+        var request = URLRequest(url: url)
+        
+        let urlSession = URLSession.shared.dataTask(with: url)
+        
+        print(urlSession)
         print("\n", url, "\n")
         
         do {
