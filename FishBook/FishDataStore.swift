@@ -119,7 +119,7 @@ class FishDataStore {
                 self.refresh()
         }
         downloadTask.resume()
-        print("success")
+        print("Connection success")
     }
     
     private func downloadFishPhoto(fishName: String) {
@@ -353,7 +353,6 @@ class FishDataStore {
         let fileManager = FileManager.default
         let bundleURL = Bundle.main.bundleURL
         let assetURL = bundleURL.appendingPathComponent("FishImages.bundle")
-//        let allFish = getAllFish()
 
         do {
           let contents = try fileManager.contentsOfDirectory(at: assetURL, includingPropertiesForKeys: [URLResourceKey.nameKey, URLResourceKey.isDirectoryKey], options: .skipsHiddenFiles)
@@ -382,10 +381,7 @@ class FishDataStore {
         var resultList: [String] = []
         let fileManager = FileManager.default
         let bundleURL = Bundle.main.bundleURL
-//        let assetURL = bundleURL.appendingPathExtension("https://github.com/quinntonelli/fish_book_editing/tree/main/fish_photos")
-        guard let url = URL(string: "https://github.com/quinntonelli/fish_book_editing/tree/main/fish_photos.bundle") else { return [""]}
-        let assetURL = bundleURL.standardizedFileURL(url)
-//        let allFish = getAllFish()
+        let assetURL = bundleURL.appendingPathExtension("fish_book_editing/fish_photos/")
         
         print("hello upload list")
 
@@ -397,7 +393,7 @@ class FishDataStore {
               let imageName = NSString(string: String(item.lastPathComponent)).deletingPathExtension
               if (!resultList.contains(imageName)) {
                   resultList.append(imageName)
-                  print(imageName)
+                  print(imageName + " in git")
               }
           }
             if (resultList.isEmpty) {
