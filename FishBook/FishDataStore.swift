@@ -134,9 +134,9 @@ class FishDataStore {
                         return
                     }
                     let desktopBundleURL = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/FishImages.bundle")
-                    print(bundleURL)
+//                    print(bundleURL)
                     let newFileURL = desktopBundleURL.appendingPathComponent("\(fishName).jpeg")
-                    print(newFileURL)
+//                    print(newFileURL)
                     try FileManager.default.copyItem(at: fileUrl, to: newFileURL)
                     
                     let desktopAssetURL = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/Fish.xcassets")
@@ -152,7 +152,7 @@ class FishDataStore {
                     let newAssetFileURL = imageFolderURL.appendingPathComponent("\(fishName).jpeg")
 //                    let fishAssets = Bundle.main.url(forResource: "Fish", withExtension: "xcassets")
 //                    print(fishAssets!)
-                    print(newAssetFileURL)
+//                    print(newAssetFileURL)
 //                    try FileManager.default.moveItem(at: fileUrl, to: fishAssets!)
                     try FileManager.default.copyItem(at: fileUrl, to: newAssetFileURL)
                     
@@ -380,33 +380,46 @@ class FishDataStore {
     func uploadList() -> [String] {
         var resultList: [String] = []
         let fileManager = FileManager.default
-        let bundleURL = Bundle.main.bundleURL
-        let assetURL = bundleURL.appendingPathExtension("fish_book_editing/fish_photos/")
+//        let bundleURL = Bundle.main.bundleURL
+//        let assetURL = bundleURL.appendingPathExtension("https://github.com/quinntonelli/fish_book_editing/tree/main/fish_photos.bundle")
         
-        print("hello upload list")
+        guard let url = URL(string: "https://cdn.jsdelivr.net/gh/quinntonelli/fish_book_editing@master/fish_photos/") else { return [] }
+        
+        print("\n")
+        print(url)
+        print("\n")
+        
+        let downloadTask = URLSession.shared.downloadTask(with: url){
+            urlOrNil, responseOrNil, errorOrNil in
+            guard let fileUrl = urlOrNil else { return }
+            
+            do {
+              let contents = try fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: [URLResourceKey.nameKey, URLResourceKey.isDirectoryKey], options: .skipsHiddenFiles)
 
-        do {
-          let contents = try fileManager.contentsOfDirectory(at: assetURL, includingPropertiesForKeys: [URLResourceKey.nameKey, URLResourceKey.isDirectoryKey], options: .skipsHiddenFiles)
-
-          for item in contents
-          {
-              let imageName = NSString(string: String(item.lastPathComponent)).deletingPathExtension
-              if (!resultList.contains(imageName)) {
-                  resultList.append(imageName)
-                  print(imageName + " in git")
+              for item in contents
+              {
+                  let imageName = NSString(string: String(item.lastPathComponent)).deletingPathExtension
+                  if (!resultList.contains(imageName)) {
+                      resultList.append(imageName)
+                      print(imageName + " in git")
+                  }
               }
-          }
-            if (resultList.isEmpty) {
-                resultList.append("")
+                if (resultList.isEmpty) {
+                    resultList.append("")
+                }
             }
-                        
-            return resultList
-        }
-        catch {
-          print(error)
-        }
+            catch {
+              print(error)
+            }
         
+        }
+        print(downloadTask)
+        downloadTask.resume()
+        
+        print(resultList)
         return resultList
     }
+
+        
     
 }
