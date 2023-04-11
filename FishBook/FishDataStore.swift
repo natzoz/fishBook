@@ -123,7 +123,9 @@ class FishDataStore {
     }
     
     private func downloadFishPhoto(fishName: String) {
-            guard let url = URL(string: "https://cdn.jsdelivr.net/gh/quinntonelli/fish_book_editing@latest/fish_photos/\(fishName).jpeg") else { return }
+            let newFishName = fishName.replacingOccurrences(of: " ", with: "%20")
+            let url = URL(string: "https://cdn.jsdelivr.net/gh/quinntonelli/fish_book_editing@latest/fish_photos/" + newFishName + ".jpeg")!
+            print(url)
             let downloadTask = URLSession.shared.downloadTask(with: url){
                 urlOrNil, responseOrNil, errorOrNil in
                 guard let fileUrl = urlOrNil else { return }
