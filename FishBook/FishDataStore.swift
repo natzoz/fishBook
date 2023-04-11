@@ -111,10 +111,6 @@ class FishDataStore {
             do {
                 let savedURL = Bundle.main.url(forResource: "fishdata", withExtension: "csv")!
                 let path = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/fishdata.csv")
-//                print("SAVED URL:")
-//                print(savedURL)
-//                print("FILE URL:")
-//                print(fileURL)
                 try FileManager.default.replaceItemAt(path, withItemAt: fileURL)
                 try FileManager.default.replaceItemAt(savedURL, withItemAt: fileURL)
                 } catch {
@@ -150,6 +146,14 @@ class FishDataStore {
                 let desktopAssetURL = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/Fish.xcassets")
                 let imageFolderURL = desktopAssetURL.appendingPathComponent("\(fishName).imageset")
                 if !FileManager.default.fileExists(atPath: imageFolderURL.path) {
+                    do {
+                        try FileManager.default.createDirectory(at: imageFolderURL, withIntermediateDirectories: false, attributes: nil)
+                    } catch {
+                        print(error.localizedDescription)
+                        return
+                    }
+                }
+                if !FileManager.default.fileExists(atPath: bundleURL.path) {
                     do {
                         try FileManager.default.createDirectory(at: imageFolderURL, withIntermediateDirectories: false, attributes: nil)
                     } catch {
