@@ -123,7 +123,6 @@ class FishDataStore {
     }
     
     private func downloadFishPhoto(fishName: String) {
-//        if fishName == "Siganus sutor"{
             guard let url = URL(string: "https://cdn.jsdelivr.net/gh/quinntonelli/fish_book_editing@latest/fish_photos/\(fishName).jpeg") else { return }
             let downloadTask = URLSession.shared.downloadTask(with: url){
                 urlOrNil, responseOrNil, errorOrNil in
@@ -378,40 +377,43 @@ class FishDataStore {
     }
     
     func uploadList() -> [String] {
-        var resultList: [String] = []
-        let fileManager = FileManager.default
+        guard let url = URL(string: "https://cdn.jsdelivr.net/gh/quinntonelli/fish_book_editing@master/fish_photos.bundle/") else { return [] }
         
-        guard let url = URL(string: "https://cdn.jsdelivr.net/gh/quinntonelli/fish_book_editing@latest/fish_photos/") else { return [] }
+        var fileNames: [String] = []
         
-        var request = URLRequest(url: url)
+        let semaphore = DispatchSemaphore(value: 0)
         
-        let urlSession = URLSession.shared.dataTask(with: url)
-        
-        print(urlSession)
-        print("\n", url, "\n")
-        
-        do {
-          let contents = try fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: [URLResourceKey.nameKey, URLResourceKey.isDirectoryKey], options: .skipsHiddenFiles)
-
-          for item in contents
-          {
-              let imageName = NSString(string: String(item.lastPathComponent)).deletingPathExtension
-              if (!resultList.contains(imageName)) {
-                  print(imageName, " in git")
-                  resultList.append(imageName)
-              }
-          }
-            if (resultList.isEmpty) {
-                resultList.append("")
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            defer {
+                semaphore.signal()
             }
-            
-            return resultList
+            guard let data = data, error == nil else {
+                print("Error while fetching file names: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+            if let html = String(data: data, encoding: .utf8){
+                
+                print("\n\n")
+                print(html)
+                
+                let regex = try! NSRegularExpression(pattern: #"<a[^>]*href\s*=\s*["'][^"']*\/(?<filename>[^\/"']+)\.(?:jpg|jpeg|png|gif)["'][^>]*>(?<text>.*?)<\/a>"#, options: [])
+                let matches = regex.matches(in: html, options: [], range: NSRange(location: 0, length: html.utf16.count))
+                
+                fileNames = matches.compactMap { match in
+                    let range = match.range(at: 1)
+                    if let swiftRange = Range(range, in: html) {
+                        return String(html[swiftRange])
+                    } else {
+                        return nil
+                    }
+                }
+            }
         }
-        catch {
-          print(error, "\n")
-        }
+        task.resume()
         
-        return resultList
+        semaphore.wait()
+        
+        return fileNames
     }
 
 }
