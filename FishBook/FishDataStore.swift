@@ -101,8 +101,12 @@ class FishDataStore {
     
     private func checkConnection(){
         guard let url = URL(string: "https://cdn.jsdelivr.net/gh/quinntonelli/fish_book_editing@latest/fishdata.csv") else { return }
+        let semaphore = DispatchSemaphore(value: 0)
         let downloadTask = URLSession.shared.downloadTask(with: url){
             urlOrNil, responseOrNil, errorOrNil in
+            defer {
+                semaphore.signal()
+            }
             guard let fileURL = urlOrNil else { return }
             do {
                 let savedURL = Bundle.main.url(forResource: "fishdata", withExtension: "csv")!
@@ -119,53 +123,55 @@ class FishDataStore {
                 self.refresh()
         }
         downloadTask.resume()
-        print("Connection success")
+        semaphore.wait()
     }
     
     private func downloadFishPhoto(fishName: String) {
-            let newFishName = fishName.replacingOccurrences(of: " ", with: "%20")
-            let url = URL(string: "https://cdn.jsdelivr.net/gh/quinntonelli/fish_book_editing@latest/fish_photos/" + newFishName + ".jpeg")!
-            print(url)
-            let downloadTask = URLSession.shared.downloadTask(with: url){
-                urlOrNil, responseOrNil, errorOrNil in
-                guard let fileUrl = urlOrNil else { return }
-                do {
-                    guard let bundleURL = Bundle.main.url(forResource: "FishImages", withExtension: "bundle") else {
-                        print("Could not find FishPhotos.bundle")
+        let newFishName = fishName.replacingOccurrences(of: " ", with: "%20")
+        let url = URL(string: "https://cdn.jsdelivr.net/gh/quinntonelli/fish_book_editing@latest/fish_photos/" + newFishName + ".jpeg")!
+        let semaphore = DispatchSemaphore(value: 0)
+        let downloadTask = URLSession.shared.downloadTask(with: url){
+            urlOrNil, responseOrNil, errorOrNil in
+            defer {
+                semaphore.signal()
+            }
+            guard let fileUrl = urlOrNil else { return }
+            do {
+                guard let bundleURL = Bundle.main.url(forResource: "FishImages", withExtension: "bundle") else {
+                    print("Could not find FishPhotos.bundle")
+                    return
+                }
+                let desktopBundleURL = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/FishImages.bundle")
+//                    print(bundleURL)
+                let newFileURL = desktopBundleURL.appendingPathComponent("\(fishName).jpeg")
+//                    print(newFileURL)
+                try FileManager.default.copyItem(at: fileUrl, to: newFileURL)
+                
+                let desktopAssetURL = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/Fish.xcassets")
+                let imageFolderURL = desktopAssetURL.appendingPathComponent("\(fishName).imageset")
+                if !FileManager.default.fileExists(atPath: imageFolderURL.path) {
+                    do {
+                        try FileManager.default.createDirectory(at: imageFolderURL, withIntermediateDirectories: false, attributes: nil)
+                    } catch {
+                        print(error.localizedDescription)
                         return
                     }
-                    let desktopBundleURL = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/FishImages.bundle")
-//                    print(bundleURL)
-                    let newFileURL = desktopBundleURL.appendingPathComponent("\(fishName).jpeg")
-//                    print(newFileURL)
-                    try FileManager.default.copyItem(at: fileUrl, to: newFileURL)
-                    
-                    let desktopAssetURL = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/Fish.xcassets")
-                    let imageFolderURL = desktopAssetURL.appendingPathComponent("\(fishName).imageset")
-                    if !FileManager.default.fileExists(atPath: imageFolderURL.path) {
-                        do {
-                            try FileManager.default.createDirectory(at: imageFolderURL, withIntermediateDirectories: false, attributes: nil)
-                        } catch {
-                            print(error.localizedDescription)
-                            return
-                        }
-                    }
-                    let newAssetFileURL = imageFolderURL.appendingPathComponent("\(fishName).jpeg")
+                }
+                let newAssetFileURL = imageFolderURL.appendingPathComponent("\(fishName).jpeg")
 //                    let fishAssets = Bundle.main.url(forResource: "Fish", withExtension: "xcassets")
 //                    print(fishAssets!)
 //                    print(newAssetFileURL)
 //                    try FileManager.default.moveItem(at: fileUrl, to: fishAssets!)
-                    try FileManager.default.copyItem(at: fileUrl, to: newAssetFileURL)
-                    
-                    self.createJsonFileForPhoto(assetURL: imageFolderURL, imageName: fishName)
-                    
-                } catch {
-                    print("file error: \(error)")
-                }
+                try FileManager.default.copyItem(at: fileUrl, to: newAssetFileURL)
+                
+                self.createJsonFileForPhoto(assetURL: imageFolderURL, imageName: fishName)
+                
+            } catch {
+                print("file error: \(error)")
             }
-            downloadTask.resume()
-            print("success")
-//        }
+        }
+        downloadTask.resume()
+        semaphore.wait()
 
     }
     
