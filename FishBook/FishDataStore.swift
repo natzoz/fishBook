@@ -141,6 +141,18 @@ class FishDataStore {
                 let newFileURL = desktopBundleURL.appendingPathComponent("\(fishName).jpeg")
                 try FileManager.default.copyItem(at: fileUrl, to: newFileURL)
                 
+                print("\n BundleURL")
+                print(bundleURL)
+                print("\n")
+                let newBundleFileURL = bundleURL.appendingPathComponent("\(fishName).jpeg")
+                print("\n newBundleFileURL")
+                print(newBundleFileURL)
+                print("\n")
+                try FileManager.default.copyItem(at: fileUrl, to: newBundleFileURL)
+                
+                let desktopBundleURL = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/FishImages.bundle")
+                let newFileURL = desktopBundleURL.appendingPathComponent("\(fishName).jpeg")
+                try FileManager.default.copyItem(at: fileUrl, to: newFileURL)
                 let desktopAssetURL = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/Fish.xcassets")
                 let imageFolderURL = desktopAssetURL.appendingPathComponent("\(fishName).imageset")
                 if !FileManager.default.fileExists(atPath: imageFolderURL.path) {
@@ -151,14 +163,7 @@ class FishDataStore {
                         return
                     }
                 }
-                if !FileManager.default.fileExists(atPath: bundleURL.path) {
-                    do {
-                        try FileManager.default.createDirectory(at: imageFolderURL, withIntermediateDirectories: false, attributes: nil)
-                    } catch {
-                        print(error.localizedDescription)
-                        return
-                    }
-                }
+
                 let newAssetFileURL = imageFolderURL.appendingPathComponent("\(fishName).jpeg")
                 try FileManager.default.copyItem(at: fileUrl, to: newAssetFileURL)
                 
