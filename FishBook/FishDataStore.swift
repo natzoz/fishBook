@@ -399,9 +399,6 @@ class FishDataStore {
             }
             if let html = String(data: data, encoding: .utf8){
                 
-                print("\n\n")
-                print(html)
-                
                 let regex = try! NSRegularExpression(pattern: #"<a[^>]*href\s*=\s*["'][^"']*\/(?<filename>[^\/"']+)\.(?:jpg|jpeg|png|gif)["'][^>]*>(?<text>.*?)<\/a>"#, options: [])
                 let matches = regex.matches(in: html, options: [], range: NSRange(location: 0, length: html.utf16.count))
                 
