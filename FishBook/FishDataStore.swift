@@ -138,9 +138,7 @@ class FishDataStore {
                     return
                 }
                 let desktopBundleURL = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/FishImages.bundle")
-//                    print(bundleURL)
                 let newFileURL = desktopBundleURL.appendingPathComponent("\(fishName).jpeg")
-//                    print(newFileURL)
                 try FileManager.default.copyItem(at: fileUrl, to: newFileURL)
                 
                 let desktopAssetURL = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/Fish.xcassets")
