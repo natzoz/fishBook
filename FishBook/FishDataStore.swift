@@ -162,10 +162,6 @@ class FishDataStore {
                     }
                 }
                 let newAssetFileURL = imageFolderURL.appendingPathComponent("\(fishName).jpeg")
-//                    let fishAssets = Bundle.main.url(forResource: "Fish", withExtension: "xcassets")
-//                    print(fishAssets!)
-//                    print(newAssetFileURL)
-//                    try FileManager.default.moveItem(at: fileUrl, to: fishAssets!)
                 try FileManager.default.copyItem(at: fileUrl, to: newAssetFileURL)
                 
                 self.createJsonFileForPhoto(assetURL: imageFolderURL, imageName: fishName)
