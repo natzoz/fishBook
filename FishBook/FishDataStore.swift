@@ -389,7 +389,7 @@ class FishDataStore {
     }
     
     func uploadList() -> [String] {
-        guard let url = URL(string: "https://cdn.jsdelivr.net/gh/quinntonelli/fish_book_editing@master/fish_photos.bundle/") else { return [] }
+        guard let url = URL(string: "https://cdn.jsdelivr.net/gh/quinntonelli/fish_book_editing@main/fish_photos/") else { return [] }
         
         var fileNames: [String] = []
         
