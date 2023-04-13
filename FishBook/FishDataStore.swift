@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 import SQLite
 import TabularData
 
@@ -39,6 +40,19 @@ class FishDataStore {
         } else {
             db = nil
         }
+        checkAndDownloadPhotos()
+    }
+    
+    func checkAndDownloadPhotos() {
+        let bundleList = bundleList()
+        let uploads = uploadList()
+        
+        for img in uploads {
+            if (!bundleList.contains(img)){
+                downloadFishPhoto(fishName: img)
+            }
+        }
+        print("Photo Download Function Complete.")
     }
     
     private func createTable() {
@@ -87,16 +101,16 @@ class FishDataStore {
     
     private func checkConnection(){
         guard let url = URL(string: "https://cdn.jsdelivr.net/gh/quinntonelli/fish_book_editing@latest/fishdata.csv") else { return }
+        let semaphore = DispatchSemaphore(value: 0)
         let downloadTask = URLSession.shared.downloadTask(with: url){
             urlOrNil, responseOrNil, errorOrNil in
+            defer {
+                semaphore.signal()
+            }
             guard let fileURL = urlOrNil else { return }
             do {
                 let savedURL = Bundle.main.url(forResource: "fishdata", withExtension: "csv")!
                 let path = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/fishdata.csv")
-//                print("SAVED URL:")
-//                print(savedURL)
-//                print("FILE URL:")
-//                print(fileURL)
                 try FileManager.default.replaceItemAt(path, withItemAt: fileURL)
                 try FileManager.default.replaceItemAt(savedURL, withItemAt: fileURL)
                 } catch {
@@ -105,7 +119,97 @@ class FishDataStore {
                 self.refresh()
         }
         downloadTask.resume()
-        print("success")
+        semaphore.wait()
+    }
+    
+    private func downloadFishPhoto(fishName: String) {
+        let newFishName = fishName.replacingOccurrences(of: " ", with: "%20")
+        let url = URL(string: "https://cdn.jsdelivr.net/gh/quinntonelli/fish_book_editing@latest/fish_photos/" + newFishName + ".jpeg")!
+        let semaphore = DispatchSemaphore(value: 0)
+        let downloadTask = URLSession.shared.downloadTask(with: url){
+            urlOrNil, responseOrNil, errorOrNil in
+            defer {
+                semaphore.signal()
+            }
+            guard let fileUrl = urlOrNil else { return }
+            do {
+                guard let bundleURL = Bundle.main.url(forResource: "FishImages", withExtension: "bundle") else {
+                    print("Could not find FishPhotos.bundle")
+                    return
+                }
+                let desktopBundleURL = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/FishImages.bundle")
+                let newFileURL = desktopBundleURL.appendingPathComponent("\(fishName).jpeg")
+                try FileManager.default.copyItem(at: fileUrl, to: newFileURL)
+                
+                print("\n BundleURL")
+                print(bundleURL)
+                print("\n")
+                let newBundleFileURL = bundleURL.appendingPathComponent("\(fishName).jpeg")
+                print("\n newBundleFileURL")
+                print(newBundleFileURL)
+                print("\n")
+                try FileManager.default.copyItem(at: fileUrl, to: newBundleFileURL)
+                
+                let desktopBundleURL = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/FishImages.bundle")
+                let newFileURL = desktopBundleURL.appendingPathComponent("\(fishName).jpeg")
+                try FileManager.default.copyItem(at: fileUrl, to: newFileURL)
+                let desktopAssetURL = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/Fish.xcassets")
+                let imageFolderURL = desktopAssetURL.appendingPathComponent("\(fishName).imageset")
+                if !FileManager.default.fileExists(atPath: imageFolderURL.path) {
+                    do {
+                        try FileManager.default.createDirectory(at: imageFolderURL, withIntermediateDirectories: false, attributes: nil)
+                    } catch {
+                        print(error.localizedDescription)
+                        return
+                    }
+                }
+
+                let newAssetFileURL = imageFolderURL.appendingPathComponent("\(fishName).jpeg")
+                try FileManager.default.copyItem(at: fileUrl, to: newAssetFileURL)
+                
+                self.createJsonFileForPhoto(assetURL: imageFolderURL, imageName: fishName)
+                
+            } catch {
+                print("file error: \(error)")
+            }
+        }
+        downloadTask.resume()
+        semaphore.wait()
+
+    }
+    
+    private func createJsonFileForPhoto(assetURL: URL, imageName: String){
+        let contents: [String: Any] = [
+            "images": [
+                [
+                    "filename": imageName + ".jpeg",
+                    "idiom": "universal",
+                    "scale": "1x"
+                ],
+                [
+                    "idiom": "universal",
+                    "scale": "2x"
+                ],
+                [
+                    "idiom": "universal",
+                    "scale": "3x"
+                ]
+            ],
+            "info": [
+                "author": "xcode",
+                "version": 1
+            ]
+        ]
+        
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: contents, options: .prettyPrinted)
+            let jsonURL = assetURL.appendingPathComponent("Contents.json")
+            try jsonData.write(to: jsonURL, options: .atomic)
+        } catch {
+            print(error.localizedDescription)
+            return
+        }
+        
     }
     
     private func refresh() {
@@ -254,4 +358,70 @@ class FishDataStore {
         return fishes
     }
     
+    func bundleList() -> [String] {
+        var resultList: [String] = []
+        let fileManager = FileManager.default
+        let bundleURL = Bundle.main.bundleURL
+        let assetURL = bundleURL.appendingPathComponent("FishImages.bundle")
+
+        do {
+          let contents = try fileManager.contentsOfDirectory(at: assetURL, includingPropertiesForKeys: [URLResourceKey.nameKey, URLResourceKey.isDirectoryKey], options: .skipsHiddenFiles)
+
+          for item in contents
+          {
+              let imageName = NSString(string: String(item.lastPathComponent)).deletingPathExtension
+              if (!resultList.contains(imageName)) {
+                  resultList.append(imageName)
+              }
+          }
+            if (resultList.isEmpty) {
+                resultList.append("")
+            }
+            
+            return resultList
+        }
+        catch {
+          print(error)
+        }
+        
+        return resultList
+    }
+    
+    func uploadList() -> [String] {
+        guard let url = URL(string: "https://cdn.jsdelivr.net/gh/quinntonelli/fish_book_editing@main/fish_photos/") else { return [] }
+        
+        var fileNames: [String] = []
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            defer {
+                semaphore.signal()
+            }
+            guard let data = data, error == nil else {
+                print("Error while fetching file names: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+            if let html = String(data: data, encoding: .utf8){
+                
+                let regex = try! NSRegularExpression(pattern: #"<a[^>]*href\s*=\s*["'][^"']*\/(?<filename>[^\/"']+)\.(?:jpg|jpeg|png|gif)["'][^>]*>(?<text>.*?)<\/a>"#, options: [])
+                let matches = regex.matches(in: html, options: [], range: NSRange(location: 0, length: html.utf16.count))
+                
+                fileNames = matches.compactMap { match in
+                    let range = match.range(at: 1)
+                    if let swiftRange = Range(range, in: html) {
+                        return String(html[swiftRange])
+                    } else {
+                        return nil
+                    }
+                }
+            }
+        }
+        task.resume()
+        
+        semaphore.wait()
+        
+        return fileNames
+    }
+
 }

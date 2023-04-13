@@ -87,7 +87,6 @@ struct ImageSlider: View {
         
         return resultList
     }
-    
 }
 
 struct FishDetailPage_Previews: PreviewProvider {

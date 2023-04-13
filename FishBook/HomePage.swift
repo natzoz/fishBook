@@ -29,6 +29,7 @@ struct Frontview: View {
                     HomePage_ImageSlider()
                         .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height/3)
                         .onTapGesture{ishidden.toggle()}
+                        //.onAppear(perform: FishDataStore.share.checkAndDownloadPhotos)
                     if ishidden{
                         VStack{
                             Text("Welcome to the world of Fish!")
