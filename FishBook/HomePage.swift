@@ -26,6 +26,13 @@ struct Frontview: View {
                 Spacer()
                 VStack{
                     Text("FishBook").font(.title)
+                    Button(action: {
+                        if let url = URL(string: "https://github.com/quinntonelli/fish_book_editing/blob/main/AboutFishBook.pdf") {
+                            UIApplication.shared.open(url)
+                        }
+                    }) {
+                        Text("About the Project")
+                    }
                     HomePage_ImageSlider()
                         .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height/3)
                         .onTapGesture{ishidden.toggle()}
