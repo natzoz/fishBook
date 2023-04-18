@@ -140,7 +140,6 @@ class FishDataStore {
                 let desktopBundleURL = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/FishImages.bundle")
                 let newFileURL = desktopBundleURL.appendingPathComponent("\(fishName).jpeg")
                 try FileManager.default.copyItem(at: fileUrl, to: newFileURL)
-                
                 print("\n BundleURL")
                 print(bundleURL)
                 print("\n")
@@ -149,7 +148,6 @@ class FishDataStore {
                 print(newBundleFileURL)
                 print("\n")
                 try FileManager.default.copyItem(at: fileUrl, to: newBundleFileURL)
-                try FileManager.default.copyItem(at: fileUrl, to: newFileURL)
                 let desktopAssetURL = URL(fileURLWithPath: "/Users/cs-488-01/Desktop/sofdev-s23-fish/FishBook/Fish.xcassets")
                 let imageFolderURL = desktopAssetURL.appendingPathComponent("\(fishName).imageset")
                 if !FileManager.default.fileExists(atPath: imageFolderURL.path) {
@@ -161,10 +159,11 @@ class FishDataStore {
                     }
                 }
 
+                
                 let newAssetFileURL = imageFolderURL.appendingPathComponent("\(fishName).jpeg")
                 try FileManager.default.copyItem(at: fileUrl, to: newAssetFileURL)
-                
                 self.createJsonFileForPhoto(assetURL: imageFolderURL, imageName: fishName)
+                
                 
             } catch {
                 print("file error: \(error)")
@@ -385,7 +384,7 @@ class FishDataStore {
     }
     
     func uploadList() -> [String] {
-        guard let url = URL(string: "https://cdn.jsdelivr.net/gh/quinntonelli/fish_book_editing@main/fish_photos/") else { return [] }
+        guard let url = URL(string: "https://github.com/quinntonelli/fish_book_editing/tree/main/fish_photos") else { return [] }
         
         var fileNames: [String] = []
         
@@ -404,10 +403,12 @@ class FishDataStore {
                 let regex = try! NSRegularExpression(pattern: #"<a[^>]*href\s*=\s*["'][^"']*\/(?<filename>[^\/"']+)\.(?:jpg|jpeg|png|gif)["'][^>]*>(?<text>.*?)<\/a>"#, options: [])
                 let matches = regex.matches(in: html, options: [], range: NSRange(location: 0, length: html.utf16.count))
                 
+                
+                
                 fileNames = matches.compactMap { match in
                     let range = match.range(at: 1)
                     if let swiftRange = Range(range, in: html) {
-                        return String(html[swiftRange])
+                        return String(html[swiftRange]).replacingOccurrences(of: "%20", with: " ")
                     } else {
                         return nil
                     }
