@@ -31,7 +31,7 @@ struct Frontview: View {
                             UIApplication.shared.open(url)
                         }
                     }) {
-                        Text("About the Project")
+                        Text("Learn More")
                     }
                     HomePage_ImageSlider()
                         .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height/3)
