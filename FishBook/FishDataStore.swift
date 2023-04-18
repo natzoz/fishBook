@@ -385,7 +385,7 @@ class FishDataStore {
     }
     
     func uploadList() -> [String] {
-        guard let url = URL(string: "https://cdn.jsdelivr.net/gh/quinntonelli/fish_book_editing@main/fish_photos/") else { return [] }
+        guard let url = URL(string: "https://github.com/quinntonelli/fish_book_editing/tree/main/fish_photos") else { return [] }
         
         var fileNames: [String] = []
         
@@ -404,10 +404,12 @@ class FishDataStore {
                 let regex = try! NSRegularExpression(pattern: #"<a[^>]*href\s*=\s*["'][^"']*\/(?<filename>[^\/"']+)\.(?:jpg|jpeg|png|gif)["'][^>]*>(?<text>.*?)<\/a>"#, options: [])
                 let matches = regex.matches(in: html, options: [], range: NSRange(location: 0, length: html.utf16.count))
                 
+                
+                
                 fileNames = matches.compactMap { match in
                     let range = match.range(at: 1)
                     if let swiftRange = Range(range, in: html) {
-                        return String(html[swiftRange])
+                        return String(html[swiftRange]).replacingOccurrences(of: "%20", with: " ")
                     } else {
                         return nil
                     }
