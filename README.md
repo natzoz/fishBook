@@ -1,7 +1,5 @@
 # FishBook
-
-# Description
-FishBook is an iOS and macOS app designed for storing and displaying fish species data collected from Tanzanian reef fishes.
+FishBook is an iOS and macOS app designed for storing and displaying fish species data collected from coral reef-associated fishes in the nearshore waters of northern Tanzania.
 
 # Prerequisites
 * Xcode 14.3
@@ -28,9 +26,9 @@ Updates to the images and fish.csv file can be made through the [fish_book_editi
 Installation of the app is limited to the free provisioning process which allows users to install the app without a paid developer account. To temporarily install the app for 7 days, follow these [instructions](https://help.apple.com/xcode/mac/current/#/dev60b6fbbc7):
 
   1. Download and open the FishBook Xcode project in Xcode
-  2. Add your Apple ID to Accounts preferences
+  2. Add your Apple ID to "Accounts preferences"
   3. Create a personal team
-  4. Be sure to select Automatically manage signing in the Signing and Capabilities tab of the project
+  4. Be sure to select "Automatically manage signing" in the "Signing and Capabilities" tab of the project
   5. Connect your device to the computer via lightning cable and add the device by navigating to Window > Devices and Simulators
   6. Select your device in the build toolbar and run the project
 
@@ -42,6 +40,146 @@ Installation of the app is limited to the free provisioning process which allows
 * iOS 16.0
 * macOS 12.6
 
+# Code Documentation
+### Fish.swift
+Fish object used for storing information about each fish.
+```swift
+struct Fish: Hashable {
+    var id: Int64
+    
+    var commonName: String
+    var scientificName: String
+    var group: String
+    var family: String
+    var habitat: String
+    var occurrence: String
+    var description: String
+    
+    var imageName: String { return scientificName}
+}
+```
+### FishData.swift
+Observable object used for getting list of fishes and fish families
+```swift
+class FishData : ObservableObject{
+    @Published var fishes: [Fish]
+    @Published var families: [String]
+    
+    init(fishes: [Fish] = [], families: [String] = []) {
+        self.fishes = fishes
+        self.families = families
+    }
+}
+
+let allFishData = FishData(fishes: FishDataStore.share.getAllFish(), families: FishDataStore.share.getAllFamilies())
+```
+
+### FishListPage.swift
+Contains multiple views for displaying individual fish cells and filters for each category. Also contains sorting algorithms and search functions for filtering the lists.
+```swift
+var body: some View {
+        NavigationStack {
+            List {
+                Picker("Filter", selection: $selectionFilter) {
+                    ForEach(categoriesFilter, id: \.self) {
+                        Text($0)
+                    }
+                }
+                .pickerStyle(.menu)
+                
+                Picker("Sort", selection: $selectionSort) {
+                    if (selectionFilter != "All Fish") {
+                        ForEach(categoriesSortShortened, id: \.self) {
+                            Text($0)
+                        }
+                    } else {
+                        ForEach(categoriesSort, id: \.self) {
+                            Text($0)
+                        }
+                    }
+                }
+                .pickerStyle(.menu)
+                
+                ForEach(allFishSearch, id: \.self) {fish in
+                    FishListCell(fish: fish)
+                }
+                ForEach(habitatSearch, id: \.self) {habitat in
+                    HabitatListCell(habitat: habitat)
+                }
+                ForEach(familySearch, id: \.self) {family in
+                    FamilyListCell(family: family)
+                }
+                ForEach(occurrenceSearch, id: \.self) {occurrence in
+                    OccurrenceListCell(occurrence: occurrence)
+                }
+                ForEach(groupSearch, id: \.self) {group in
+                    GroupListCell(group: group)
+                }
+            }
+            .navigationTitle("All Fish")
+        }
+        .searchable(text: $searchText)
+    }
+```
+
+### FishDetailPage.swift
+Contains the detailed view for displaying information about each fish including scientific name, common name, habitat, and occurence. Also has the ability to show multiple images and zoom in on each image.
+```swift
+var body: some View {
+        VStack(alignment: .leading) {
+            ImageSlider(fish: fish)
+                .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height/2)
+            VStack(alignment: .leading) {
+                Text(fish.scientificName)
+                    .font(.title)
+                    .italic()
+                    .padding(.bottom, 3)
+                HStack {
+                    Text("Family:").bold()
+                    Text(fish.family)
+                }
+                HStack {
+                    Text("Group:").bold()
+                    Text(fish.group)
+                }
+                HStack {
+                    Text("Occurrence:").bold()
+                    Text(fish.occurrence)
+                }
+                HStack {
+                    Text("Habitat:").bold()
+                    Text(fish.habitat)
+                }
+            }
+            .padding(.leading)
+            Spacer()
+        }
+        .navigationTitle(fish.commonName)
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+```
+
+### FishDataStore.swift
+Contains the initialization for the fish database that contains the essential information for each fish. Also contains methods for pulling images and data from the files on the fish_book_editing repository.
+```swift
+static let DIR_FISH_DB = "FishDB"
+    static let STORE_NAME = "fish.sqlite3"
+    
+    private let fishes = Table("fish")
+    
+    private let id = Expression<Int64>("id")
+    private let commonName = Expression<String>("commonName")
+    private let scientificName = Expression<String>("scientificName")
+    private let group = Expression<String>("group")
+    private let family = Expression<String>("family")
+    private let habitat = Expression<String>("habitat")
+    private let occurrence = Expression<String>("occurrence")
+    private let description = Expression<String>("description")
+    
+    static let share = FishDataStore()
+```
+
 # Authors and Acknowledgments
 Created by:
 * Berto Gonzalez
@@ -51,6 +189,6 @@ Created by:
 * Natalie Zoz
 
 Data Collected by:
-Ken Cliffton
+Dr. Kenneth E. Clifton
 
 Created for CS-488 Software Development Spring 2023 at Lewis & Clark College
